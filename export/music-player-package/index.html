@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>音乐播放器 · Aurora · 交互预览</title>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0b0b0b;
+  font-family: "Microsoft YaHei UI", "Segoe UI", system-ui, sans-serif;
+}
+.viewport {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.holder { position: relative; flex: none; }
+.stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: top left;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .65);
+}
+.layer {
+  position: absolute;
+  box-sizing: border-box;
+  transform-origin: center center;
+  will-change: transform, left, top, width, height, opacity;
+}
+.layer-text { display: flex; align-items: center; justify-content: flex-start; }
+.chrome {
+  position: fixed;
+  left: 18px;
+  top: 14px;
+  color: #9a9a9a;
+  font-size: 11px;
+  line-height: 1.6;
+  pointer-events: none;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .8);
+}
+.chrome strong { color: #e2e2e2; font-weight: 600; }
+.chrome span { color: #6e6e6e; }
+.actions {
+  position: fixed;
+  right: 18px;
+  bottom: 16px;
+  display: flex;
+  gap: 8px;
+}
+.actions button {
+  background: rgba(35, 35, 35, .92);
+  color: #d6d6d6;
+  border: 1px solid #4a4a4a;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.actions button:hover { background: #3d3d3d; border-color: #2d8ceb; color: #fff; }
+.hint {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  color: #6e6e6e;
+  font-size: 11px;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+<div class="chrome"><strong>音乐播放器 · Aurora</strong><br><span>1280 × 800 px · DeepDesign</span></div>
+<div class="viewport"><div class="holder" id="holder"><div class="stage" id="stage" style="width:1280.00px;height:800.00px;background:#0A0D14;"><div class="layer" id="bg_glow_1" data-id="bg_glow_1" data-name="背景光晕 1" data-type="ellipse" style="left:-220.00px;top:-240.00px;width:700.00px;height:700.00px;opacity:0.500;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#13325C;border:0;border-radius:50%;"></div></div><div class="layer" id="bg_glow_2" data-id="bg_glow_2" data-name="背景光晕 2" data-type="ellipse" style="left:900.00px;top:420.00px;width:620.00px;height:620.00px;opacity:0.450;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#3B1F4E;border:0;border-radius:50%;"></div></div><div class="layer" id="bg_star" data-id="bg_star" data-name="背景星点" data-type="star" style="left:1110.00px;top:130.00px;width:60.00px;height:60.00px;opacity:0.550;transform:rotate(14.00deg);"><svg data-shape viewBox="0 0 60.00 60.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><polygon points="30.00,0.00 37.76,19.32 58.53,20.73 42.55,34.08 47.63,54.27 30.00,43.20 12.37,54.27 17.45,34.08 1.47,20.73 22.24,19.32" fill="#FFB454" stroke="none" stroke-width="0.00" stroke-linejoin="round"/></svg></div><div class="layer" id="player_card" data-id="player_card" data-name="播放器主卡片" data-type="rect" style="left:100.00px;top:86.00px;width:1080.00px;height:628.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:linear-gradient(225.00deg, #151F30 0.00%, #0C111C 100.00%);border:1.50px solid #1F2B40;border-radius:30.00px;"></div></div><div class="layer" id="album_card" data-id="album_card" data-name="专辑封面卡片" data-type="rect" style="left:136.00px;top:122.00px;width:396.00px;height:556.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:linear-gradient(180.00deg, #1B2638 0.00%, #101724 100.00%);border:1.00px solid #24324A;border-radius:24.00px;"></div></div><div class="layer" id="cover" data-id="cover" data-name="专辑封面" data-type="rect" style="left:164.00px;top:150.00px;width:340.00px;height:340.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:linear-gradient(225.00deg, #233A5C 0.00%, #0F1725 100.00%);border:1.50px solid #2D8CEB;border-radius:20.00px;"></div></div><div class="layer" id="vinyl" data-id="vinyl" data-name="唱片" data-type="ellipse" style="left:204.00px;top:190.00px;width:260.00px;height:260.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#2D8CEB;border:0;border-radius:50%;"></div></div><div class="layer" id="vinyl_ring" data-id="vinyl_ring" data-name="唱片纹路" data-type="ellipse" style="left:236.00px;top:222.00px;width:196.00px;height:196.00px;opacity:0.950;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#0F1725;border:3.00px solid #FFFFFF;border-radius:50%;"></div></div><div class="layer" id="vinyl_hole" data-id="vinyl_hole" data-name="唱片中心" data-type="ellipse" style="left:300.00px;top:286.00px;width:68.00px;height:68.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#EAF3FF;border:0;border-radius:50%;"></div></div><div class="layer layer-text" id="album_badge" data-id="album_badge" data-name="专辑标签" data-type="text" style="left:164.00px;top:506.00px;width:180.00px;height:22.00px;opacity:1.000;transform:rotate(0.00deg);color:#5AA9F0;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:700;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">NOW PLAYING</div></div><div class="layer layer-text" id="album_title" data-id="album_title" data-name="专辑标题" data-type="text" style="left:164.00px;top:530.00px;width:340.00px;height:36.00px;opacity:1.000;transform:rotate(0.00deg);color:#F4F7FF;font-family:'Microsoft YaHei UI';font-size:23.0px;font-weight:700;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">AURORA NIGHTS</div></div><div class="layer layer-text" id="album_artist" data-id="album_artist" data-name="专辑艺人" data-type="text" style="left:164.00px;top:566.00px;width:340.00px;height:24.00px;opacity:1.000;transform:rotate(0.00deg);color:#8B97AC;font-family:'Microsoft YaHei UI';font-size:13.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">DeepSeek Waves</div></div><div class="layer" id="progress_bg" data-id="progress_bg" data-name="进度条背景" data-type="rect" style="left:164.00px;top:612.00px;width:340.00px;height:4.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#26324A;border:0;border-radius:2.00px;"></div></div><div class="layer" id="progress" data-id="progress" data-name="播放进度" data-type="rect" style="left:164.00px;top:612.00px;width:148.00px;height:4.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#2D8CEB;border:0;border-radius:2.00px;"></div></div><div class="layer layer-text" id="time_now" data-id="time_now" data-name="已播放时间" data-type="text" style="left:164.00px;top:626.00px;width:60.00px;height:20.00px;opacity:1.000;transform:rotate(0.00deg);color:#7E8CA3;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">0:48</div></div><div class="layer layer-text" id="time_total" data-id="time_total" data-name="总时长" data-type="text" style="left:444.00px;top:626.00px;width:60.00px;height:20.00px;opacity:1.000;transform:rotate(0.00deg);color:#7E8CA3;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:right;">3:12</div></div><div class="layer layer-text" id="playing_label" data-id="playing_label" data-name="播放状态" data-type="text" style="left:620.00px;top:140.00px;width:300.00px;height:22.00px;opacity:1.000;transform:rotate(0.00deg);color:#5AA9F0;font-family:'Microsoft YaHei UI';font-size:12.0px;font-weight:700;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">正在播放</div></div><div class="layer layer-text" id="track_title" data-id="track_title" data-name="歌曲标题" data-type="text" style="left:620.00px;top:166.00px;width:540.00px;height:48.00px;opacity:1.000;transform:rotate(0.00deg);color:#F4F7FF;font-family:'Microsoft YaHei UI';font-size:36.0px;font-weight:700;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">Aurora Nights</div></div><div class="layer layer-text" id="track_artist" data-id="track_artist" data-name="歌曲艺人" data-type="text" style="left:620.00px;top:214.00px;width:540.00px;height:26.00px;opacity:1.000;transform:rotate(0.00deg);color:#8B97AC;font-family:'Microsoft YaHei UI';font-size:15.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">DeepSeek Waves · 氛围电子</div></div><div class="layer" id="like_star" data-id="like_star" data-name="收藏星标" data-type="star" style="left:1110.00px;top:178.00px;width:52.00px;height:52.00px;opacity:0.900;transform:rotate(8.00deg);"><svg data-shape viewBox="0 0 52.00 52.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><polygon points="26.00,0.00 32.72,16.74 50.73,17.97 36.88,29.54 41.28,47.03 26.00,37.44 10.72,47.03 15.12,29.54 1.27,17.97 19.28,16.74" fill="#FFB454" stroke="none" stroke-width="0.00" stroke-linejoin="round"/></svg></div><div class="layer" id="playlist_card" data-id="playlist_card" data-name="播放列表" data-type="rect" style="left:620.00px;top:260.00px;width:540.00px;height:350.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#0D1420;border:1.00px solid #1E2A3D;border-radius:22.00px;"></div></div><div class="layer" id="active_row" data-id="active_row" data-name="当前播放行" data-type="rect" style="left:638.00px;top:278.00px;width:504.00px;height:58.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#16233A;border:0;border-radius:14.00px;"></div></div><div class="layer" id="active_dot" data-id="active_dot" data-name="播放指示点" data-type="ellipse" style="left:656.00px;top:300.00px;width:10.00px;height:10.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#2D8CEB;border:0;border-radius:50%;"></div></div><div class="layer layer-text" id="track_1" data-id="track_1" data-name="曲目 1" data-type="text" style="left:682.00px;top:286.00px;width:330.00px;height:42.00px;opacity:1.000;transform:rotate(0.00deg);color:#F4F7FF;font-family:'Microsoft YaHei UI';font-size:15.0px;font-weight:700;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">Aurora Nights</div></div><div class="layer layer-text" id="track_1_artist" data-id="track_1_artist" data-name="曲目 1 艺人" data-type="text" style="left:682.00px;top:310.00px;width:330.00px;height:20.00px;opacity:1.000;transform:rotate(0.00deg);color:#7E8CA3;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">DeepSeek Waves</div></div><div class="layer layer-text" id="track_1_time" data-id="track_1_time" data-name="曲目 1 时长" data-type="text" style="left:1064.00px;top:288.00px;width:60.00px;height:40.00px;opacity:1.000;transform:rotate(0.00deg);color:#8B97AC;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:right;">3:12</div></div><div class="layer layer-text" id="track_2" data-id="track_2" data-name="曲目 2" data-type="text" style="left:682.00px;top:350.00px;width:300.00px;height:34.00px;opacity:1.000;transform:rotate(0.00deg);color:#C7D2E3;font-family:'Microsoft YaHei UI';font-size:14.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">Neon Tides</div></div><div class="layer layer-text" id="track_2_artist" data-id="track_2_artist" data-name="曲目 2 艺人" data-type="text" style="left:682.00px;top:376.00px;width:300.00px;height:20.00px;opacity:1.000;transform:rotate(0.00deg);color:#6F7B90;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">Mirage Unit</div></div><div class="layer layer-text" id="track_2_time" data-id="track_2_time" data-name="曲目 2 时长" data-type="text" style="left:1064.00px;top:358.00px;width:60.00px;height:30.00px;opacity:1.000;transform:rotate(0.00deg);color:#6F7B90;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:right;">4:05</div></div><div class="layer" id="row_sep_2" data-id="row_sep_2" data-name="分隔线 2" data-type="line" style="left:656.00px;top:410.00px;width:468.00px;height:1.00px;opacity:1.000;transform:rotate(0.00deg);"><svg data-shape viewBox="0 0 468.00 1.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><line x1="0.00" y1="0.00" x2="468.00" y2="0.00" stroke="#1B2536" stroke-width="1.00" stroke-linecap="round"/></svg></div><div class="layer layer-text" id="track_3" data-id="track_3" data-name="曲目 3" data-type="text" style="left:682.00px;top:426.00px;width:300.00px;height:34.00px;opacity:1.000;transform:rotate(0.00deg);color:#C7D2E3;font-family:'Microsoft YaHei UI';font-size:14.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">Glass Horizon</div></div><div class="layer layer-text" id="track_3_artist" data-id="track_3_artist" data-name="曲目 3 艺人" data-type="text" style="left:682.00px;top:452.00px;width:300.00px;height:20.00px;opacity:1.000;transform:rotate(0.00deg);color:#6F7B90;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">Lumen Field</div></div><div class="layer layer-text" id="track_3_time" data-id="track_3_time" data-name="曲目 3 时长" data-type="text" style="left:1064.00px;top:434.00px;width:60.00px;height:30.00px;opacity:1.000;transform:rotate(0.00deg);color:#6F7B90;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:right;">3:48</div></div><div class="layer" id="row_sep_3" data-id="row_sep_3" data-name="分隔线 3" data-type="line" style="left:656.00px;top:486.00px;width:468.00px;height:1.00px;opacity:1.000;transform:rotate(0.00deg);"><svg data-shape viewBox="0 0 468.00 1.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><line x1="0.00" y1="0.00" x2="468.00" y2="0.00" stroke="#1B2536" stroke-width="1.00" stroke-linecap="round"/></svg></div><div class="layer layer-text" id="track_4" data-id="track_4" data-name="曲目 4" data-type="text" style="left:682.00px;top:502.00px;width:300.00px;height:34.00px;opacity:1.000;transform:rotate(0.00deg);color:#C7D2E3;font-family:'Microsoft YaHei UI';font-size:14.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">Silent Orbit</div></div><div class="layer layer-text" id="track_4_artist" data-id="track_4_artist" data-name="曲目 4 艺人" data-type="text" style="left:682.00px;top:528.00px;width:300.00px;height:20.00px;opacity:1.000;transform:rotate(0.00deg);color:#6F7B90;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">DeepSeek Waves</div></div><div class="layer layer-text" id="track_4_time" data-id="track_4_time" data-name="曲目 4 时长" data-type="text" style="left:1064.00px;top:510.00px;width:60.00px;height:30.00px;opacity:1.000;transform:rotate(0.00deg);color:#6F7B90;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:right;">5:21</div></div><div class="layer" id="ctrl_prev" data-id="ctrl_prev" data-name="上一首按钮" data-type="ellipse" style="left:640.00px;top:650.00px;width:54.00px;height:54.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#182234;border:1.00px solid #2A3854;border-radius:50%;"></div></div><div class="layer" id="ctrl_prev_icon" data-id="ctrl_prev_icon" data-name="上一首图标" data-type="polygon" style="left:653.00px;top:663.00px;width:28.00px;height:28.00px;opacity:1.000;transform:rotate(-90.00deg);"><svg data-shape viewBox="0 0 28.00 28.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><polygon points="14.00,0.00 26.12,21.00 1.88,21.00" fill="#C7D2E3" stroke="none" stroke-width="0.00" stroke-linejoin="round"/></svg></div><div class="layer" id="play_button" data-id="play_button" data-name="播放按钮" data-type="ellipse" style="left:726.00px;top:636.00px;width:82.00px;height:82.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#2D8CEB;border:1.00px solid #70A9F2;border-radius:50%;"></div></div><div class="layer" id="play_icon" data-id="play_icon" data-name="播放图标" data-type="polygon" style="left:754.00px;top:661.00px;width:30.00px;height:34.00px;opacity:1.000;transform:rotate(90.00deg);"><svg data-shape viewBox="0 0 30.00 34.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><polygon points="15.00,0.00 27.99,25.50 2.01,25.50" fill="#FFFFFF" stroke="none" stroke-width="0.00" stroke-linejoin="round"/></svg></div><div class="layer" id="ctrl_next" data-id="ctrl_next" data-name="下一首按钮" data-type="ellipse" style="left:840.00px;top:650.00px;width:54.00px;height:54.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#182234;border:1.00px solid #2A3854;border-radius:50%;"></div></div><div class="layer" id="ctrl_next_icon" data-id="ctrl_next_icon" data-name="下一首图标" data-type="polygon" style="left:853.00px;top:663.00px;width:28.00px;height:28.00px;opacity:1.000;transform:rotate(90.00deg);"><svg data-shape viewBox="0 0 28.00 28.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><polygon points="14.00,0.00 26.12,21.00 1.88,21.00" fill="#C7D2E3" stroke="none" stroke-width="0.00" stroke-linejoin="round"/></svg></div><div class="layer" id="eq_1" data-id="eq_1" data-name="频谱柱 1" data-type="rect" style="left:934.00px;top:676.00px;width:8.00px;height:24.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#2D8CEB;border:0;border-radius:4.00px;"></div></div><div class="layer" id="eq_2" data-id="eq_2" data-name="频谱柱 2" data-type="rect" style="left:950.00px;top:664.00px;width:8.00px;height:36.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#5AA9F0;border:0;border-radius:4.00px;"></div></div><div class="layer" id="eq_3" data-id="eq_3" data-name="频谱柱 3" data-type="rect" style="left:966.00px;top:682.00px;width:8.00px;height:18.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#A47BFF;border:0;border-radius:4.00px;"></div></div><div class="layer layer-text" id="eq_label" data-id="eq_label" data-name="频谱标签" data-type="text" style="left:998.00px;top:668.00px;width:120.00px;height:30.00px;opacity:1.000;transform:rotate(0.00deg);color:#5AA9F0;font-family:'Microsoft YaHei UI';font-size:11.0px;font-weight:700;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">LIVE MIX</div></div></div></div></div>
+<div class="hint">点击或悬停交互对象 · 由 .ddesign 设计文件生成</div>
+<div class="actions"><button onclick="playAll()">播放全部</button><button onclick="replay()">重播</button></div>
+<script>
+const DESIGN = {"animations":[{"duration":1.25,"easing":"easeOutCubic","id":"anim_music_intro","loop":false,"name":"播放器入场","tracks":[{"elementId":"player_card","keyframes":[{"time":0,"value":0},{"time":0.65,"value":1}],"property":"opacity"},{"elementId":"player_card","keyframes":[{"time":0,"value":116},{"time":0.8,"value":86}],"property":"y"},{"elementId":"album_card","keyframes":[{"time":0.08,"value":0},{"time":0.8,"value":1}],"property":"opacity"},{"elementId":"album_card","keyframes":[{"time":0.08,"value":108},{"time":0.8,"value":136}],"property":"x"},{"elementId":"cover","keyframes":[{"time":0.15,"value":-8},{"time":0.9,"value":0}],"property":"rotation"},{"elementId":"track_title","keyframes":[{"time":0.2,"value":660},{"time":0.95,"value":620}],"property":"x"},{"elementId":"track_title","keyframes":[{"time":0.2,"value":0},{"time":0.95,"value":1}],"property":"opacity"},{"elementId":"track_artist","keyframes":[{"time":0.3,"value":0},{"time":1,"value":1}],"property":"opacity"},{"elementId":"playlist_card","keyframes":[{"time":0.3,"value":0},{"time":1.05,"value":1}],"property":"opacity"},{"elementId":"playlist_card","keyframes":[{"time":0.3,"value":286},{"time":1.05,"value":260}],"property":"y"},{"elementId":"play_button","keyframes":[{"time":0.5,"value":0},{"time":1.15,"value":1}],"property":"opacity"},{"elementId":"ctrl_prev","keyframes":[{"time":0.55,"value":0},{"time":1.2,"value":1}],"property":"opacity"},{"elementId":"ctrl_next","keyframes":[{"time":0.55,"value":0},{"time":1.2,"value":1}],"property":"opacity"}]},{"duration":1.6,"easing":"easeInOutCubic","id":"anim_play_pulse","loop":true,"name":"播放脉冲","tracks":[{"elementId":"play_button","keyframes":[{"time":0,"value":"#2D8CEB"},{"time":0.8,"value":"#3DDC97"},{"time":1.6,"value":"#2D8CEB"}],"property":"fill"},{"elementId":"progress","keyframes":[{"time":0,"value":148},{"time":1.6,"value":340}],"property":"width"},{"elementId":"vinyl_ring","keyframes":[{"time":0,"value":0},{"time":1.6,"value":360}],"property":"rotation"}]},{"duration":0.8,"easing":"easeInOutCubic","id":"anim_equalizer","loop":true,"name":"频谱律动","tracks":[{"elementId":"eq_1","keyframes":[{"time":0,"value":10},{"time":0.2,"value":34},{"time":0.4,"value":14},{"time":0.6,"value":40},{"time":0.8,"value":10}],"property":"height"},{"elementId":"eq_1","keyframes":[{"time":0,"value":690},{"time":0.2,"value":666},{"time":0.4,"value":686},{"time":0.6,"value":660},{"time":0.8,"value":690}],"property":"y"},{"elementId":"eq_2","keyframes":[{"time":0,"value":30},{"time":0.2,"value":12},{"time":0.4,"value":38},{"time":0.6,"value":20},{"time":0.8,"value":30}],"property":"height"},{"elementId":"eq_2","keyframes":[{"time":0,"value":670},{"time":0.2,"value":688},{"time":0.4,"value":662},{"time":0.6,"value":680},{"time":0.8,"value":670}],"property":"y"},{"elementId":"eq_3","keyframes":[{"time":0,"value":18},{"time":0.2,"value":42},{"time":0.4,"value":16},{"time":0.6,"value":32},{"time":0.8,"value":18}],"property":"height"},{"elementId":"eq_3","keyframes":[{"time":0,"value":682},{"time":0.2,"value":658},{"time":0.4,"value":684},{"time":0.6,"value":668},{"time":0.8,"value":682}],"property":"y"}]},{"duration":0.4,"easing":"easeOutBack","id":"anim_cover_hover","loop":false,"name":"封面悬停","tracks":[{"elementId":"cover","keyframes":[{"time":0,"value":164},{"time":0.4,"value":158}],"property":"x"},{"elementId":"cover","keyframes":[{"time":0,"value":150},{"time":0.4,"value":144}],"property":"y"},{"elementId":"cover","keyframes":[{"time":0,"value":340},{"time":0.4,"value":352}],"property":"width"},{"elementId":"cover","keyframes":[{"time":0,"value":340},{"time":0.4,"value":352}],"property":"height"},{"elementId":"like_star","keyframes":[{"time":0,"value":8},{"time":0.4,"value":28}],"property":"rotation"}]}],"canvas":{"background":"#0A0D14","height":800,"width":1280},"elements":[{"fill":"#13325C","height":700,"id":"bg_glow_1","locked":false,"name":"背景光晕 1","opacity":0.5,"rotation":0,"stroke":"#13325C","strokeWidth":0,"type":"ellipse","visible":true,"width":700,"x":-220,"y":-240},{"fill":"#3B1F4E","height":620,"id":"bg_glow_2","locked":false,"name":"背景光晕 2","opacity":0.45,"rotation":0,"stroke":"#3B1F4E","strokeWidth":0,"type":"ellipse","visible":true,"width":620,"x":900,"y":420},{"fill":"#FFB454","height":60,"id":"bg_star","locked":false,"name":"背景星点","opacity":0.55,"rotation":14,"sides":5,"stroke":"#FFB454","strokeWidth":0,"type":"star","visible":true,"width":60,"x":1110,"y":130},{"fill":"#111826","gradient":{"angle":135,"stops":[{"color":"#151F30","position":0},{"color":"#0C111C","position":1}],"type":"linear"},"height":628,"id":"player_card","locked":false,"name":"播放器主卡片","opacity":1,"radius":30,"rotation":0,"stroke":"#1F2B40","strokeWidth":1.5,"type":"rect","visible":true,"width":1080,"x":100,"y":86},{"fill":"#161F2F","gradient":{"angle":90,"stops":[{"color":"#1B2638","position":0},{"color":"#101724","position":1}],"type":"linear"},"height":556,"id":"album_card","locked":false,"name":"专辑封面卡片","opacity":1,"radius":24,"rotation":0,"stroke":"#24324A","strokeWidth":1,"type":"rect","visible":true,"width":396,"x":136,"y":122},{"fill":"#1B2A45","gradient":{"angle":135,"stops":[{"color":"#233A5C","position":0},{"color":"#0F1725","position":1}],"type":"linear"},"height":340,"id":"cover","locked":false,"name":"专辑封面","opacity":1,"radius":20,"rotation":0,"stroke":"#2D8CEB","strokeWidth":1.5,"type":"rect","visible":true,"width":340,"x":164,"y":150},{"fill":"#2D8CEB","height":260,"id":"vinyl","locked":false,"name":"唱片","opacity":1,"rotation":0,"stroke":"#2D8CEB","strokeWidth":0,"type":"ellipse","visible":true,"width":260,"x":204,"y":190},{"fill":"#0F1725","height":196,"id":"vinyl_ring","locked":false,"name":"唱片纹路","opacity":0.95,"rotation":0,"stroke":"#FFFFFF","strokeWidth":3,"type":"ellipse","visible":true,"width":196,"x":236,"y":222},{"fill":"#EAF3FF","height":68,"id":"vinyl_hole","locked":false,"name":"唱片中心","opacity":1,"rotation":0,"stroke":"#EAF3FF","strokeWidth":0,"type":"ellipse","visible":true,"width":68,"x":300,"y":286},{"align":"left","bold":true,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":22,"id":"album_badge","locked":false,"name":"专辑标签","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"NOW PLAYING","textColor":"#5AA9F0","type":"text","visible":true,"width":180,"x":164,"y":506},{"align":"left","bold":true,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":23,"height":36,"id":"album_title","locked":false,"name":"专辑标题","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"AURORA NIGHTS","textColor":"#F4F7FF","type":"text","visible":true,"width":340,"x":164,"y":530},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":13,"height":24,"id":"album_artist","locked":false,"name":"专辑艺人","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"DeepSeek Waves","textColor":"#8B97AC","type":"text","visible":true,"width":340,"x":164,"y":566},{"fill":"#26324A","height":4,"id":"progress_bg","locked":false,"name":"进度条背景","opacity":1,"radius":2,"rotation":0,"stroke":"#26324A","strokeWidth":0,"type":"rect","visible":true,"width":340,"x":164,"y":612},{"fill":"#2D8CEB","height":4,"id":"progress","locked":false,"name":"播放进度","opacity":1,"radius":2,"rotation":0,"stroke":"#2D8CEB","strokeWidth":0,"type":"rect","visible":true,"width":148,"x":164,"y":612},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":20,"id":"time_now","locked":false,"name":"已播放时间","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"0:48","textColor":"#7E8CA3","type":"text","visible":true,"width":60,"x":164,"y":626},{"align":"right","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":20,"id":"time_total","locked":false,"name":"总时长","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"3:12","textColor":"#7E8CA3","type":"text","visible":true,"width":60,"x":444,"y":626},{"align":"left","bold":true,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":12,"height":22,"id":"playing_label","locked":false,"name":"播放状态","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"正在播放","textColor":"#5AA9F0","type":"text","visible":true,"width":300,"x":620,"y":140},{"align":"left","bold":true,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":36,"height":48,"id":"track_title","locked":false,"name":"歌曲标题","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"Aurora Nights","textColor":"#F4F7FF","type":"text","visible":true,"width":540,"x":620,"y":166},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":15,"height":26,"id":"track_artist","locked":false,"name":"歌曲艺人","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"DeepSeek Waves · 氛围电子","textColor":"#8B97AC","type":"text","visible":true,"width":540,"x":620,"y":214},{"fill":"#FFB454","height":52,"id":"like_star","locked":false,"name":"收藏星标","opacity":0.9,"rotation":8,"sides":5,"stroke":"#FFB454","strokeWidth":0,"type":"star","visible":true,"width":52,"x":1110,"y":178},{"fill":"#0D1420","height":350,"id":"playlist_card","locked":false,"name":"播放列表","opacity":1,"radius":22,"rotation":0,"stroke":"#1E2A3D","strokeWidth":1,"type":"rect","visible":true,"width":540,"x":620,"y":260},{"fill":"#16233A","height":58,"id":"active_row","locked":false,"name":"当前播放行","opacity":1,"radius":14,"rotation":0,"stroke":"#16233A","strokeWidth":0,"type":"rect","visible":true,"width":504,"x":638,"y":278},{"fill":"#2D8CEB","height":10,"id":"active_dot","locked":false,"name":"播放指示点","opacity":1,"rotation":0,"stroke":"#2D8CEB","strokeWidth":0,"type":"ellipse","visible":true,"width":10,"x":656,"y":300},{"align":"left","bold":true,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":15,"height":42,"id":"track_1","locked":false,"name":"曲目 1","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"Aurora Nights","textColor":"#F4F7FF","type":"text","visible":true,"width":330,"x":682,"y":286},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":20,"id":"track_1_artist","locked":false,"name":"曲目 1 艺人","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"DeepSeek Waves","textColor":"#7E8CA3","type":"text","visible":true,"width":330,"x":682,"y":310},{"align":"right","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":40,"id":"track_1_time","locked":false,"name":"曲目 1 时长","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"3:12","textColor":"#8B97AC","type":"text","visible":true,"width":60,"x":1064,"y":288},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":14,"height":34,"id":"track_2","locked":false,"name":"曲目 2","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"Neon Tides","textColor":"#C7D2E3","type":"text","visible":true,"width":300,"x":682,"y":350},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":20,"id":"track_2_artist","locked":false,"name":"曲目 2 艺人","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"Mirage Unit","textColor":"#6F7B90","type":"text","visible":true,"width":300,"x":682,"y":376},{"align":"right","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":30,"id":"track_2_time","locked":false,"name":"曲目 2 时长","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"4:05","textColor":"#6F7B90","type":"text","visible":true,"width":60,"x":1064,"y":358},{"fill":"#1B2536","height":1,"id":"row_sep_2","lineEnd":[1,0],"lineStart":[0,0],"locked":false,"name":"分隔线 2","opacity":1,"rotation":0,"stroke":"#1B2536","strokeWidth":1,"type":"line","visible":true,"width":468,"x":656,"y":410},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":14,"height":34,"id":"track_3","locked":false,"name":"曲目 3","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"Glass Horizon","textColor":"#C7D2E3","type":"text","visible":true,"width":300,"x":682,"y":426},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":20,"id":"track_3_artist","locked":false,"name":"曲目 3 艺人","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"Lumen Field","textColor":"#6F7B90","type":"text","visible":true,"width":300,"x":682,"y":452},{"align":"right","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":30,"id":"track_3_time","locked":false,"name":"曲目 3 时长","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"3:48","textColor":"#6F7B90","type":"text","visible":true,"width":60,"x":1064,"y":434},{"fill":"#1B2536","height":1,"id":"row_sep_3","lineEnd":[1,0],"lineStart":[0,0],"locked":false,"name":"分隔线 3","opacity":1,"rotation":0,"stroke":"#1B2536","strokeWidth":1,"type":"line","visible":true,"width":468,"x":656,"y":486},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":14,"height":34,"id":"track_4","locked":false,"name":"曲目 4","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"Silent Orbit","textColor":"#C7D2E3","type":"text","visible":true,"width":300,"x":682,"y":502},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":20,"id":"track_4_artist","locked":false,"name":"曲目 4 艺人","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"DeepSeek Waves","textColor":"#6F7B90","type":"text","visible":true,"width":300,"x":682,"y":528},{"align":"right","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":30,"id":"track_4_time","locked":false,"name":"曲目 4 时长","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"5:21","textColor":"#6F7B90","type":"text","visible":true,"width":60,"x":1064,"y":510},{"fill":"#182234","height":54,"id":"ctrl_prev","locked":false,"name":"上一首按钮","opacity":1,"rotation":0,"stroke":"#2A3854","strokeWidth":1,"type":"ellipse","visible":true,"width":54,"x":640,"y":650},{"fill":"#C7D2E3","height":28,"id":"ctrl_prev_icon","locked":false,"name":"上一首图标","opacity":1,"rotation":-90,"sides":3,"stroke":"#C7D2E3","strokeWidth":0,"type":"polygon","visible":true,"width":28,"x":653,"y":663},{"fill":"#2D8CEB","height":82,"id":"play_button","locked":false,"name":"播放按钮","opacity":1,"rotation":0,"stroke":"#70A9F2","strokeWidth":1,"type":"ellipse","visible":true,"width":82,"x":726,"y":636},{"fill":"#FFFFFF","height":34,"id":"play_icon","locked":false,"name":"播放图标","opacity":1,"rotation":90,"sides":3,"stroke":"#FFFFFF","strokeWidth":0,"type":"polygon","visible":true,"width":30,"x":754,"y":661},{"fill":"#182234","height":54,"id":"ctrl_next","locked":false,"name":"下一首按钮","opacity":1,"rotation":0,"stroke":"#2A3854","strokeWidth":1,"type":"ellipse","visible":true,"width":54,"x":840,"y":650},{"fill":"#C7D2E3","height":28,"id":"ctrl_next_icon","locked":false,"name":"下一首图标","opacity":1,"rotation":90,"sides":3,"stroke":"#C7D2E3","strokeWidth":0,"type":"polygon","visible":true,"width":28,"x":853,"y":663},{"fill":"#2D8CEB","height":24,"id":"eq_1","locked":false,"name":"频谱柱 1","opacity":1,"radius":4,"rotation":0,"stroke":"#2D8CEB","strokeWidth":0,"type":"rect","visible":true,"width":8,"x":934,"y":676},{"fill":"#5AA9F0","height":36,"id":"eq_2","locked":false,"name":"频谱柱 2","opacity":1,"radius":4,"rotation":0,"stroke":"#5AA9F0","strokeWidth":0,"type":"rect","visible":true,"width":8,"x":950,"y":664},{"fill":"#A47BFF","height":18,"id":"eq_3","locked":false,"name":"频谱柱 3","opacity":1,"radius":4,"rotation":0,"stroke":"#A47BFF","strokeWidth":0,"type":"rect","visible":true,"width":8,"x":966,"y":682},{"align":"left","bold":true,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":11,"height":30,"id":"eq_label","locked":false,"name":"频谱标签","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"LIVE MIX","textColor":"#5AA9F0","type":"text","visible":true,"width":120,"x":998,"y":668}],"format":"DeepDesign","generator":"DeepDesign Studio 1.0","guides":[],"interactions":[{"action":"playAnimation","animationId":"anim_music_intro","sourceId":"player_card","trigger":"load"},{"action":"playAnimation","animationId":"anim_cover_hover","sourceId":"cover","trigger":"hover"},{"action":"playAnimation","animationId":"anim_play_pulse","sourceId":"play_button","trigger":"click"},{"action":"playAnimation","animationId":"anim_equalizer","sourceId":"play_button","trigger":"click"},{"action":"playAnimation","animationId":"anim_play_pulse","sourceId":"ctrl_next","trigger":"click"}],"title":"音乐播放器 · Aurora","version":1};
+
+const stage = document.getElementById('stage');
+const holder = document.getElementById('holder');
+const W = DESIGN.canvas.width, H = DESIGN.canvas.height;
+const byId = new Map(DESIGN.elements.map(e => [e.id, e]));
+const animations = new Map(DESIGN.animations.map(a => [a.id, a]));
+let active = [];
+let rafId = 0;
+
+function fit() {
+  const scale = Math.max(0.05, Math.min((window.innerWidth - 56) / W, (window.innerHeight - 56) / H, 1.6));
+  holder.style.width = (W * scale) + 'px';
+  holder.style.height = (H * scale) + 'px';
+  stage.style.transform = 'scale(' + scale + ')';
+}
+window.addEventListener('resize', fit);
+fit();
+
+function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+function ease(name, t) {
+  t = clamp01(t);
+  switch (name) {
+    case 'easeInQuad': return t * t;
+    case 'easeOutQuad': return 1 - (1 - t) * (1 - t);
+    case 'easeInOutCubic': return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    case 'easeOutCubic': return 1 - Math.pow(1 - t, 3);
+    case 'easeOutBack': {
+      const c1 = 1.70158, c3 = c1 + 1;
+      return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+    }
+    case 'easeOutElastic': {
+      if (t <= 0) return 0;
+      if (t >= 1) return 1;
+      const c4 = (2 * Math.PI) / 3;
+      return Math.pow(2, -10 * t) * Math.sin((t * 10 - .75) * c4) + 1;
+    }
+    case 'easeOutBounce': {
+      const n1 = 7.5625, d1 = 2.75;
+      if (t < 1 / d1) return n1 * t * t;
+      if (t < 2 / d1) { t -= 1.5 / d1; return n1 * t * t + .75; }
+      if (t < 2.5 / d1) { t -= 2.25 / d1; return n1 * t * t + .9375; }
+      t -= 2.625 / d1; return n1 * t * t + .984375;
+    }
+    default: return t;
+  }
+}
+
+function parseColor(value) {
+  if (!value) return { r: 0, g: 0, b: 0, a: 1 };
+  let hex = String(value).replace('#', '');
+  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  if (hex.length === 6) hex += 'ff';
+  if (hex.length !== 8) return { r: 255, g: 255, b: 255, a: 1 };
+  return {
+    r: parseInt(hex.slice(0, 2), 16),
+    g: parseInt(hex.slice(2, 4), 16),
+    b: parseInt(hex.slice(4, 6), 16),
+    a: parseInt(hex.slice(6, 8), 16) / 255,
+  };
+}
+function lerpColor(a, b, t) {
+  const ca = parseColor(a), cb = parseColor(b);
+  const r = Math.round(ca.r + (cb.r - ca.r) * t);
+  const g = Math.round(ca.g + (cb.g - ca.g) * t);
+  const bl = Math.round(ca.b + (cb.b - ca.b) * t);
+  const al = ca.a + (cb.a - ca.a) * t;
+  return 'rgba(' + r + ',' + g + ',' + bl + ',' + al.toFixed(3) + ')';
+}
+
+function sampleTrack(track, time, easing) {
+  const keys = track.keyframes;
+  if (!keys || !keys.length) return null;
+  if (time <= keys[0].time) return keys[0].value;
+  if (time >= keys[keys.length - 1].time) return keys[keys.length - 1].value;
+  let i = 0;
+  while (i < keys.length - 2 && time > keys[i + 1].time) i++;
+  const a = keys[i], b = keys[i + 1];
+  const span = b.time - a.time;
+  let u = span <= 0.000001 ? 1 : (time - a.time) / span;
+  u = ease(easing, u);
+  if (track.property === 'fill') return lerpColor(a.value, b.value, u);
+  return a.value + (b.value - a.value) * u;
+}
+
+function gradientCss(e) {
+  if (!e.gradient || !e.gradient.stops || e.gradient.stops.length < 2) return e.fill;
+  const stops = e.gradient.stops.map(s => s.color + ' ' + (s.position * 100).toFixed(2) + '%').join(', ');
+  if (e.gradient.type === 'radial') return 'radial-gradient(circle at 50% 50%, ' + stops + ')';
+  const angle = ((e.gradient.angle + 90) % 360 + 360) % 360;
+  return 'linear-gradient(' + angle.toFixed(2) + 'deg, ' + stops + ')';
+}
+
+function svgFill(e) {
+  if (e.gradient && e.gradient.stops && e.gradient.stops.length >= 2) {
+    return 'url(#grad_' + e.id + ')';
+  }
+  return e.fill;
+}
+
+function resetElement(e) {
+  const node = document.getElementById(e.id);
+  if (!node) return;
+  node.style.left = e.x + 'px';
+  node.style.top = e.y + 'px';
+  node.style.width = e.width + 'px';
+  node.style.height = e.height + 'px';
+  node.style.opacity = e.opacity;
+  node.style.transform = 'rotate(' + e.rotation + 'deg)';
+  node.style.display = e.visible ? '' : 'none';
+  if (e.type === 'text') {
+    node.style.color = e.textColor;
+  } else if (e.type === 'rect' || e.type === 'ellipse') {
+    node.querySelector('.shape-fill').style.background = gradientCss(e);
+    const border = node.querySelector('.shape-fill');
+    if (e.strokeWidth > 0) {
+      border.style.border = e.strokeWidth + 'px solid ' + e.stroke;
+      border.style.borderRadius = e.type === 'ellipse' ? '50%' :
+        Math.max(0, Math.min(e.radius, Math.min(e.width, e.height) / 2)) + 'px';
+    } else {
+      border.style.border = '0';
+    }
+  } else {
+    const shape = node.querySelector('[data-shape]');
+    if (!shape) return;
+    if (e.type === 'line') {
+      const stroke = e.strokeWidth > 0 ? e.stroke : (e.fill || '#FFFFFF');
+      shape.setAttribute('stroke', stroke);
+      shape.setAttribute('stroke-width', Math.max(1, e.strokeWidth));
+    } else {
+      shape.setAttribute('fill', svgFill(e));
+      shape.setAttribute('stroke', e.strokeWidth > 0 ? e.stroke : 'none');
+      shape.setAttribute('stroke-width', e.strokeWidth);
+    }
+  }
+}
+
+function applyValue(element, property, value) {
+  const node = document.getElementById(element.id);
+  if (!node) return;
+  if (property === 'x' || property === 'y' || property === 'width' || property === 'height') {
+    node.style[property] = value + 'px';
+    return;
+  }
+  if (property === 'rotation') {
+    node.style.transform = 'rotate(' + value + 'deg)';
+    return;
+  }
+  if (property === 'opacity') {
+    node.style.opacity = value;
+    return;
+  }
+  if (property === 'fill') {
+    if (element.gradient) return;
+    if (element.type === 'text') {
+      node.style.color = value;
+    } else if (element.type === 'rect' || element.type === 'ellipse') {
+      const fill = node.querySelector('.shape-fill');
+      if (fill) fill.style.background = value;
+    } else {
+      const shape = node.querySelector('[data-shape]');
+      if (shape) {
+        if (element.type === 'line') shape.setAttribute('stroke', value);
+        else shape.setAttribute('fill', value);
+      }
+    }
+    return;
+  }
+  if (property === 'strokeWidth') {
+    if (element.type === 'rect' || element.type === 'ellipse') {
+      const fill = node.querySelector('.shape-fill');
+      if (fill) {
+        fill.style.borderWidth = value + 'px';
+        fill.style.borderStyle = value > 0 ? 'solid' : 'none';
+      }
+    } else {
+      const shape = node.querySelector('[data-shape]');
+      if (shape) shape.setAttribute('stroke-width', value);
+    }
+  }
+}
+
+function startFrameLoop() {
+  if (rafId) return;
+  rafId = requestAnimationFrame(frame);
+}
+
+function frame(now) {
+  rafId = 0;
+  const merged = new Map();
+  let keepGoing = false;
+  for (const act of active) {
+    const anim = animations.get(act.id);
+    if (!anim) continue;
+    let t = (now - act.start) / 1000;
+    const duration = Math.max(0.001, anim.duration);
+    if (anim.loop) {
+      t = t % duration;
+      keepGoing = true;
+    } else if (t >= duration) {
+      t = duration;
+      act.done = true;
+    } else {
+      keepGoing = true;
+    }
+    for (const track of anim.tracks) {
+      const value = sampleTrack(track, t, anim.easing);
+      if (value === null) continue;
+      if (!merged.has(track.elementId)) merged.set(track.elementId, new Map());
+      merged.get(track.elementId).set(track.property, value);
+    }
+  }
+  for (const [elementId, props] of merged) {
+    const element = byId.get(elementId);
+    if (!element) continue;
+    for (const [property, value] of props) applyValue(element, property, value);
+  }
+  if (keepGoing) rafId = requestAnimationFrame(frame);
+}
+
+function playAnimation(id) {
+  const anim = animations.get(id);
+  if (!anim) return;
+  const now = performance.now();
+  const existing = active.find(a => a.id === id);
+  if (existing) {
+    existing.start = now;
+    existing.done = false;
+  } else {
+    active.push({ id: id, start: now, done: false });
+  }
+  startFrameLoop();
+}
+
+function stopAll() {
+  active = [];
+  if (rafId) cancelAnimationFrame(rafId);
+  rafId = 0;
+  for (const element of DESIGN.elements) resetElement(element);
+}
+
+function trigger(sourceId, eventType) {
+  for (const interaction of DESIGN.interactions) {
+    if (interaction.sourceId !== sourceId || interaction.trigger !== eventType) continue;
+    if (interaction.action === 'stopAll') stopAll();
+    else if (interaction.action === 'playAnimation' && interaction.animationId) {
+      playAnimation(interaction.animationId);
+    }
+  }
+}
+
+function replay() {
+  stopAll();
+  for (const interaction of DESIGN.interactions) {
+    if (interaction.trigger === 'load') trigger(interaction.sourceId, 'load');
+  }
+}
+
+function playAll() {
+  stopAll();
+  for (const anim of DESIGN.animations) playAnimation(anim.id);
+}
+
+const interactive = new Set();
+for (const interaction of DESIGN.interactions) {
+  if (interaction.trigger === 'click' || interaction.trigger === 'hover') {
+    interactive.add(interaction.sourceId);
+  }
+}
+for (const element of DESIGN.elements) {
+  const node = document.getElementById(element.id);
+  if (!node) continue;
+  node.addEventListener('click', () => trigger(element.id, 'click'));
+  node.addEventListener('mouseenter', () => trigger(element.id, 'hover'));
+  node.addEventListener('mouseleave', () => trigger(element.id, 'leave'));
+  if (interactive.has(element.id)) {
+    node.style.cursor = 'pointer';
+    node.setAttribute('tabindex', '0');
+    node.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        trigger(element.id, 'click');
+      }
+    });
+  }
+}
+
+window.DeepDesign = { playAnimation, stopAll, replay, playAll, design: DESIGN };
+const urlParams = new URLSearchParams(location.search);
+if (!urlParams.has('noanim')) {
+  setTimeout(replay, 60);
+}
+</script>
+</body>
+</html>

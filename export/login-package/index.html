@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>登录界面 · 极光蓝 · 交互预览</title>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0b0b0b;
+  font-family: "Microsoft YaHei UI", "Segoe UI", system-ui, sans-serif;
+}
+.viewport {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.holder { position: relative; flex: none; }
+.stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: top left;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .65);
+}
+.layer {
+  position: absolute;
+  box-sizing: border-box;
+  transform-origin: center center;
+  will-change: transform, left, top, width, height, opacity;
+}
+.layer-text { display: flex; align-items: center; justify-content: flex-start; }
+.chrome {
+  position: fixed;
+  left: 18px;
+  top: 14px;
+  color: #9a9a9a;
+  font-size: 11px;
+  line-height: 1.6;
+  pointer-events: none;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .8);
+}
+.chrome strong { color: #e2e2e2; font-weight: 600; }
+.chrome span { color: #6e6e6e; }
+.actions {
+  position: fixed;
+  right: 18px;
+  bottom: 16px;
+  display: flex;
+  gap: 8px;
+}
+.actions button {
+  background: rgba(35, 35, 35, .92);
+  color: #d6d6d6;
+  border: 1px solid #4a4a4a;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.actions button:hover { background: #3d3d3d; border-color: #2d8ceb; color: #fff; }
+.hint {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  color: #6e6e6e;
+  font-size: 11px;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+<div class="chrome"><strong>登录界面 · 极光蓝</strong><br><span>1280 × 800 px · DeepDesign</span></div>
+<div class="viewport"><div class="holder" id="holder"><div class="stage" id="stage" style="width:1280.00px;height:800.00px;background:#0A0F1A;"><div class="layer" id="glow_blue" data-id="glow_blue" data-name="蓝色光晕" data-type="ellipse" style="left:-170.00px;top:-190.00px;width:650.00px;height:650.00px;opacity:0.550;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#12335F;border:0;border-radius:50%;"></div></div><div class="layer" id="glow_violet" data-id="glow_violet" data-name="紫色光晕" data-type="ellipse" style="left:900.00px;top:480.00px;width:500.00px;height:500.00px;opacity:0.550;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#2B1A4A;border:0;border-radius:50%;"></div></div><div class="layer" id="wave" data-id="wave" data-name="底部波纹" data-type="path" style="left:0.00px;top:620.00px;width:1280.00px;height:180.00px;opacity:0.700;transform:rotate(0.00deg);"><svg data-shape viewBox="0 0 1280.00 180.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><polygon points="0.00,99.00 204.80,45.00 409.60,86.40 640.00,32.40 870.40,75.60 1075.20,36.00 1280.00,90.00 1280.00,180.00 0.00,180.00" fill="#10233A" stroke="none" stroke-width="0.00" stroke-linejoin="round"/></svg></div><div class="layer" id="deco_star_1" data-id="deco_star_1" data-name="装饰星" data-type="star" style="left:1030.00px;top:170.00px;width:44.00px;height:44.00px;opacity:0.500;transform:rotate(12.00deg);"><svg data-shape viewBox="0 0 44.00 44.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><polygon points="22.00,0.00 27.69,14.17 42.92,15.20 31.21,24.99 34.93,39.80 22.00,31.68 9.07,39.80 12.79,24.99 1.08,15.20 16.31,14.17" fill="#5AA9F0" stroke="none" stroke-width="0.00" stroke-linejoin="round"/></svg></div><div class="layer" id="deco_star_2" data-id="deco_star_2" data-name="装饰星 2" data-type="star" style="left:250.00px;top:610.00px;width:26.00px;height:26.00px;opacity:0.600;transform:rotate(-12.00deg);"><svg data-shape viewBox="0 0 26.00 26.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><polygon points="13.00,0.00 16.36,8.37 25.36,8.98 18.44,14.77 20.64,23.52 13.00,18.72 5.36,23.52 7.56,14.77 0.64,8.98 9.64,8.37" fill="#A47BFF" stroke="none" stroke-width="0.00" stroke-linejoin="round"/></svg></div><div class="layer" id="deco_hex" data-id="deco_hex" data-name="装饰六边形" data-type="polygon" style="left:1060.00px;top:640.00px;width:92.00px;height:92.00px;opacity:0.800;transform:rotate(18.00deg);"><svg data-shape viewBox="0 0 92.00 92.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><polygon points="46.00,0.00 85.84,23.00 85.84,69.00 46.00,92.00 6.16,69.00 6.16,23.00" fill="#1A2B46" stroke="none" stroke-width="0.00" stroke-linejoin="round"/></svg></div><div class="layer" id="login_card" data-id="login_card" data-name="登录卡片" data-type="rect" style="left:380.00px;top:90.00px;width:520.00px;height:620.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:linear-gradient(225.00deg, #1A2740 0.00%, #111A2A 60.00%, #0D1421 100.00%);border:1.50px solid #23304A;border-radius:28.00px;"></div></div><div class="layer" id="logo_card" data-id="logo_card" data-name="品牌标记" data-type="rect" style="left:604.00px;top:126.00px;width:72.00px;height:72.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:linear-gradient(225.00deg, #5AA9F0 0.00%, #2D8CEB 100.00%);border:1.00px solid #5AA9F0;border-radius:18.00px;"></div></div><div class="layer layer-text" id="logo_letter" data-id="logo_letter" data-name="品牌字母" data-type="text" style="left:604.00px;top:126.00px;width:72.00px;height:72.00px;opacity:1.000;transform:rotate(0.00deg);color:#FFFFFF;font-family:'Microsoft YaHei UI';font-size:36.0px;font-weight:700;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;">D</div></div><div class="layer layer-text" id="title" data-id="title" data-name="欢迎标题" data-type="text" style="left:380.00px;top:232.00px;width:520.00px;height:52.00px;opacity:1.000;transform:rotate(0.00deg);color:#F4F7FF;font-family:'Microsoft YaHei UI';font-size:36.0px;font-weight:700;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;">欢迎回来</div></div><div class="layer layer-text" id="subtitle" data-id="subtitle" data-name="副标题" data-type="text" style="left:380.00px;top:292.00px;width:520.00px;height:28.00px;opacity:1.000;transform:rotate(0.00deg);color:#8B97AC;font-family:'Microsoft YaHei UI';font-size:14.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;">登录以继续使用灵绘云设计工作台</div></div><div class="layer layer-text" id="email_label" data-id="email_label" data-name="邮箱标签" data-type="text" style="left:450.00px;top:334.00px;width:200.00px;height:22.00px;opacity:1.000;transform:rotate(0.00deg);color:#7E8CA3;font-family:'Microsoft YaHei UI';font-size:12.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">邮箱地址</div></div><div class="layer" id="email_input" data-id="email_input" data-name="邮箱输入框" data-type="rect" style="left:450.00px;top:360.00px;width:380.00px;height:54.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#0A1019;border:1.00px solid #2A3854;border-radius:12.00px;"></div></div><div class="layer" id="email_dot" data-id="email_dot" data-name="邮箱状态点" data-type="ellipse" style="left:466.00px;top:382.00px;width:8.00px;height:8.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#3DDC97;border:0;border-radius:50%;"></div></div><div class="layer layer-text" id="email_text" data-id="email_text" data-name="邮箱内容" data-type="text" style="left:486.00px;top:360.00px;width:322.00px;height:54.00px;opacity:1.000;transform:rotate(0.00deg);color:#C7D2E3;font-family:'Microsoft YaHei UI';font-size:14.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">hello@deepdesign.ai</div></div><div class="layer layer-text" id="password_label" data-id="password_label" data-name="密码标签" data-type="text" style="left:450.00px;top:430.00px;width:200.00px;height:22.00px;opacity:1.000;transform:rotate(0.00deg);color:#7E8CA3;font-family:'Microsoft YaHei UI';font-size:12.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">密码</div></div><div class="layer" id="password_input" data-id="password_input" data-name="密码输入框" data-type="rect" style="left:450.00px;top:456.00px;width:380.00px;height:54.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#0A1019;border:1.00px solid #2A3854;border-radius:12.00px;"></div></div><div class="layer layer-text" id="password_text" data-id="password_text" data-name="密码占位" data-type="text" style="left:470.00px;top:456.00px;width:330.00px;height:54.00px;opacity:1.000;transform:rotate(0.00deg);color:#C7D2E3;font-family:'Microsoft YaHei UI';font-size:15.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;">••••••••••</div></div><div class="layer layer-text" id="show_password" data-id="show_password" data-name="显示密码" data-type="text" style="left:738.00px;top:456.00px;width:76.00px;height:54.00px;opacity:1.000;transform:rotate(0.00deg);color:#5AA9F0;font-family:'Microsoft YaHei UI';font-size:12.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:right;">显示</div></div><div class="layer" id="login_button" data-id="login_button" data-name="登录按钮" data-type="rect" style="left:450.00px;top:548.00px;width:380.00px;height:58.00px;opacity:1.000;transform:rotate(0.00deg);"><div class="shape-fill" style="position:absolute;inset:0;box-sizing:border-box;background:#2D8CEB;border:1.00px solid #70A9F2;border-radius:14.00px;"></div></div><div class="layer layer-text" id="login_button_text" data-id="login_button_text" data-name="登录按钮文字" data-type="text" style="left:450.00px;top:548.00px;width:380.00px;height:58.00px;opacity:1.000;transform:rotate(0.00deg);color:#FFFFFF;font-family:'Microsoft YaHei UI';font-size:17.0px;font-weight:700;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;">登 录</div></div><div class="layer layer-text" id="forgot_password" data-id="forgot_password" data-name="忘记密码" data-type="text" style="left:690.00px;top:620.00px;width:140.00px;height:22.00px;opacity:1.000;transform:rotate(0.00deg);color:#7E8CA3;font-family:'Microsoft YaHei UI';font-size:12.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:right;">忘记密码？</div></div><div class="layer" id="divider" data-id="divider" data-name="分隔线" data-type="line" style="left:450.00px;top:654.00px;width:380.00px;height:1.00px;opacity:1.000;transform:rotate(0.00deg);"><svg data-shape viewBox="0 0 380.00 1.00" preserveAspectRatio="none" style="display:block;width:100%;height:100%;overflow:visible;"><line x1="0.00" y1="0.00" x2="380.00" y2="0.00" stroke="#26324A" stroke-width="1.00" stroke-linecap="round"/></svg></div><div class="layer layer-text" id="register_hint" data-id="register_hint" data-name="注册提示" data-type="text" style="left:380.00px;top:672.00px;width:520.00px;height:24.00px;opacity:1.000;transform:rotate(0.00deg);color:#8B97AC;font-family:'Microsoft YaHei UI';font-size:12.0px;font-weight:400;line-height:1.25;"><div class="textbox" style="width:100%;padding:2px 2px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;">还没有账号？ 立即注册</div></div></div></div></div>
+<div class="hint">点击或悬停交互对象 · 由 .ddesign 设计文件生成</div>
+<div class="actions"><button onclick="playAll()">播放全部</button><button onclick="replay()">重播</button></div>
+<script>
+const DESIGN = {"animations":[{"duration":1.2,"easing":"easeOutCubic","id":"anim_intro","loop":false,"name":"入场动画","tracks":[{"elementId":"login_card","keyframes":[{"time":0,"value":0},{"time":0.55,"value":1}],"property":"opacity"},{"elementId":"login_card","keyframes":[{"time":0,"value":118},{"time":0.7,"value":90}],"property":"y"},{"elementId":"logo_card","keyframes":[{"time":0,"value":-90},{"time":0.75,"value":0}],"property":"rotation"},{"elementId":"logo_card","keyframes":[{"time":0,"value":0},{"time":0.45,"value":1}],"property":"opacity"},{"elementId":"logo_letter","keyframes":[{"time":0,"value":0},{"time":0.55,"value":1}],"property":"opacity"},{"elementId":"title","keyframes":[{"time":0.1,"value":266},{"time":0.75,"value":232}],"property":"y"},{"elementId":"title","keyframes":[{"time":0.1,"value":0},{"time":0.75,"value":1}],"property":"opacity"},{"elementId":"subtitle","keyframes":[{"time":0.18,"value":324},{"time":0.85,"value":292}],"property":"y"},{"elementId":"subtitle","keyframes":[{"time":0.18,"value":0},{"time":0.85,"value":1}],"property":"opacity"},{"elementId":"email_input","keyframes":[{"time":0.3,"value":420},{"time":0.9,"value":450}],"property":"x"},{"elementId":"email_input","keyframes":[{"time":0.3,"value":0},{"time":0.9,"value":1}],"property":"opacity"},{"elementId":"password_input","keyframes":[{"time":0.38,"value":410},{"time":0.98,"value":450}],"property":"x"},{"elementId":"password_input","keyframes":[{"time":0.38,"value":0},{"time":0.98,"value":1}],"property":"opacity"},{"elementId":"login_button","keyframes":[{"time":0.45,"value":580},{"time":1.05,"value":548}],"property":"y"},{"elementId":"login_button","keyframes":[{"time":0.45,"value":0},{"time":1.05,"value":1}],"property":"opacity"},{"elementId":"login_button_text","keyframes":[{"time":0.55,"value":0},{"time":1.1,"value":1}],"property":"opacity"}]},{"duration":0.32,"easing":"easeOutCubic","id":"anim_login_hover","loop":false,"name":"按钮悬停","tracks":[{"elementId":"login_button","keyframes":[{"time":0,"value":"#2D8CEB"},{"time":0.32,"value":"#3D9CFA"}],"property":"fill"},{"elementId":"login_button","keyframes":[{"time":0,"value":450},{"time":0.32,"value":446}],"property":"x"},{"elementId":"login_button","keyframes":[{"time":0,"value":380},{"time":0.32,"value":388}],"property":"width"},{"elementId":"login_button","keyframes":[{"time":0,"value":548},{"time":0.32,"value":544}],"property":"y"},{"elementId":"login_button","keyframes":[{"time":0,"value":58},{"time":0.32,"value":66}],"property":"height"}]},{"duration":0.55,"easing":"easeInOutCubic","id":"anim_login_click","loop":false,"name":"登录点击反馈","tracks":[{"elementId":"login_button","keyframes":[{"time":0,"value":"#2D8CEB"},{"time":0.22,"value":"#3DDC97"},{"time":0.36,"value":"#3DDC97"},{"time":0.55,"value":"#2D8CEB"}],"property":"fill"},{"elementId":"login_card","keyframes":[{"time":0,"value":0},{"time":0.18,"value":-0.8},{"time":0.36,"value":0.8},{"time":0.55,"value":0}],"property":"rotation"}]}],"canvas":{"background":"#0A0F1A","height":800,"width":1280},"elements":[{"fill":"#12335F","height":650,"id":"glow_blue","locked":false,"name":"蓝色光晕","opacity":0.55,"rotation":0,"stroke":"#12335F","strokeWidth":0,"type":"ellipse","visible":true,"width":650,"x":-170,"y":-190},{"fill":"#2B1A4A","height":500,"id":"glow_violet","locked":false,"name":"紫色光晕","opacity":0.55,"rotation":0,"stroke":"#2B1A4A","strokeWidth":0,"type":"ellipse","visible":true,"width":500,"x":900,"y":480},{"closed":true,"fill":"#10233A","height":180,"id":"wave","locked":false,"name":"底部波纹","opacity":0.7,"points":[[0,0.55],[0.16,0.25],[0.32,0.48],[0.5,0.18],[0.68,0.42],[0.84,0.2],[1,0.5],[1,1],[0,1]],"rotation":0,"stroke":"#10233A","strokeWidth":0,"type":"path","visible":true,"width":1280,"x":0,"y":620},{"fill":"#5AA9F0","height":44,"id":"deco_star_1","locked":false,"name":"装饰星","opacity":0.5,"rotation":12,"sides":5,"stroke":"#5AA9F0","strokeWidth":0,"type":"star","visible":true,"width":44,"x":1030,"y":170},{"fill":"#A47BFF","height":26,"id":"deco_star_2","locked":false,"name":"装饰星 2","opacity":0.6,"rotation":-12,"sides":5,"stroke":"#A47BFF","strokeWidth":0,"type":"star","visible":true,"width":26,"x":250,"y":610},{"fill":"#1A2B46","height":92,"id":"deco_hex","locked":false,"name":"装饰六边形","opacity":0.8,"rotation":18,"sides":6,"stroke":"#1A2B46","strokeWidth":0,"type":"polygon","visible":true,"width":92,"x":1060,"y":640},{"fill":"#121A2B","gradient":{"angle":135,"stops":[{"color":"#1A2740","position":0},{"color":"#111A2A","position":0.6},{"color":"#0D1421","position":1}],"type":"linear"},"height":620,"id":"login_card","locked":false,"name":"登录卡片","opacity":1,"radius":28,"rotation":0,"stroke":"#23304A","strokeWidth":1.5,"type":"rect","visible":true,"width":520,"x":380,"y":90},{"fill":"#2D8CEB","gradient":{"angle":135,"stops":[{"color":"#5AA9F0","position":0},{"color":"#2D8CEB","position":1}],"type":"linear"},"height":72,"id":"logo_card","locked":false,"name":"品牌标记","opacity":1,"radius":18,"rotation":0,"stroke":"#5AA9F0","strokeWidth":1,"type":"rect","visible":true,"width":72,"x":604,"y":126},{"align":"center","bold":true,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":36,"height":72,"id":"logo_letter","locked":false,"name":"品牌字母","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"D","textColor":"#FFFFFF","type":"text","visible":true,"width":72,"x":604,"y":126},{"align":"center","bold":true,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":36,"height":52,"id":"title","locked":false,"name":"欢迎标题","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"欢迎回来","textColor":"#F4F7FF","type":"text","visible":true,"width":520,"x":380,"y":232},{"align":"center","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":14,"height":28,"id":"subtitle","locked":false,"name":"副标题","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"登录以继续使用灵绘云设计工作台","textColor":"#8B97AC","type":"text","visible":true,"width":520,"x":380,"y":292},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":12,"height":22,"id":"email_label","locked":false,"name":"邮箱标签","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"邮箱地址","textColor":"#7E8CA3","type":"text","visible":true,"width":200,"x":450,"y":334},{"fill":"#0A1019","height":54,"id":"email_input","locked":false,"name":"邮箱输入框","opacity":1,"radius":12,"rotation":0,"stroke":"#2A3854","strokeWidth":1,"type":"rect","visible":true,"width":380,"x":450,"y":360},{"fill":"#3DDC97","height":8,"id":"email_dot","locked":false,"name":"邮箱状态点","opacity":1,"rotation":0,"stroke":"#3DDC97","strokeWidth":0,"type":"ellipse","visible":true,"width":8,"x":466,"y":382},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":14,"height":54,"id":"email_text","locked":false,"name":"邮箱内容","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"hello@deepdesign.ai","textColor":"#C7D2E3","type":"text","visible":true,"width":322,"x":486,"y":360},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":12,"height":22,"id":"password_label","locked":false,"name":"密码标签","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"密码","textColor":"#7E8CA3","type":"text","visible":true,"width":200,"x":450,"y":430},{"fill":"#0A1019","height":54,"id":"password_input","locked":false,"name":"密码输入框","opacity":1,"radius":12,"rotation":0,"stroke":"#2A3854","strokeWidth":1,"type":"rect","visible":true,"width":380,"x":450,"y":456},{"align":"left","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":15,"height":54,"id":"password_text","locked":false,"name":"密码占位","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"••••••••••","textColor":"#C7D2E3","type":"text","visible":true,"width":330,"x":470,"y":456},{"align":"right","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":12,"height":54,"id":"show_password","locked":false,"name":"显示密码","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"显示","textColor":"#5AA9F0","type":"text","visible":true,"width":76,"x":738,"y":456},{"fill":"#2D8CEB","height":58,"id":"login_button","locked":false,"name":"登录按钮","opacity":1,"radius":14,"rotation":0,"stroke":"#70A9F2","strokeWidth":1,"type":"rect","visible":true,"width":380,"x":450,"y":548},{"align":"center","bold":true,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":17,"height":58,"id":"login_button_text","locked":false,"name":"登录按钮文字","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"登 录","textColor":"#FFFFFF","type":"text","visible":true,"width":380,"x":450,"y":548},{"align":"right","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":12,"height":22,"id":"forgot_password","locked":false,"name":"忘记密码","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"忘记密码？","textColor":"#7E8CA3","type":"text","visible":true,"width":140,"x":690,"y":620},{"fill":"#26324A","height":1,"id":"divider","lineEnd":[1,0],"lineStart":[0,0],"locked":false,"name":"分隔线","opacity":1,"rotation":0,"stroke":"#26324A","strokeWidth":1,"type":"line","visible":true,"width":380,"x":450,"y":654},{"align":"center","bold":false,"fill":"#00000000","fontFamily":"Microsoft YaHei UI","fontSize":12,"height":24,"id":"register_hint","locked":false,"name":"注册提示","opacity":1,"rotation":0,"stroke":"#00000000","strokeWidth":0,"text":"还没有账号？ 立即注册","textColor":"#8B97AC","type":"text","visible":true,"width":520,"x":380,"y":672}],"format":"DeepDesign","generator":"DeepDesign Studio 1.0","guides":[],"interactions":[{"action":"playAnimation","animationId":"anim_intro","sourceId":"login_card","trigger":"load"},{"action":"playAnimation","animationId":"anim_login_hover","sourceId":"login_button","trigger":"hover"},{"action":"playAnimation","animationId":"anim_login_click","sourceId":"login_button","trigger":"click"}],"title":"登录界面 · 极光蓝","version":1};
+
+const stage = document.getElementById('stage');
+const holder = document.getElementById('holder');
+const W = DESIGN.canvas.width, H = DESIGN.canvas.height;
+const byId = new Map(DESIGN.elements.map(e => [e.id, e]));
+const animations = new Map(DESIGN.animations.map(a => [a.id, a]));
+let active = [];
+let rafId = 0;
+
+function fit() {
+  const scale = Math.max(0.05, Math.min((window.innerWidth - 56) / W, (window.innerHeight - 56) / H, 1.6));
+  holder.style.width = (W * scale) + 'px';
+  holder.style.height = (H * scale) + 'px';
+  stage.style.transform = 'scale(' + scale + ')';
+}
+window.addEventListener('resize', fit);
+fit();
+
+function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+function ease(name, t) {
+  t = clamp01(t);
+  switch (name) {
+    case 'easeInQuad': return t * t;
+    case 'easeOutQuad': return 1 - (1 - t) * (1 - t);
+    case 'easeInOutCubic': return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    case 'easeOutCubic': return 1 - Math.pow(1 - t, 3);
+    case 'easeOutBack': {
+      const c1 = 1.70158, c3 = c1 + 1;
+      return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+    }
+    case 'easeOutElastic': {
+      if (t <= 0) return 0;
+      if (t >= 1) return 1;
+      const c4 = (2 * Math.PI) / 3;
+      return Math.pow(2, -10 * t) * Math.sin((t * 10 - .75) * c4) + 1;
+    }
+    case 'easeOutBounce': {
+      const n1 = 7.5625, d1 = 2.75;
+      if (t < 1 / d1) return n1 * t * t;
+      if (t < 2 / d1) { t -= 1.5 / d1; return n1 * t * t + .75; }
+      if (t < 2.5 / d1) { t -= 2.25 / d1; return n1 * t * t + .9375; }
+      t -= 2.625 / d1; return n1 * t * t + .984375;
+    }
+    default: return t;
+  }
+}
+
+function parseColor(value) {
+  if (!value) return { r: 0, g: 0, b: 0, a: 1 };
+  let hex = String(value).replace('#', '');
+  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  if (hex.length === 6) hex += 'ff';
+  if (hex.length !== 8) return { r: 255, g: 255, b: 255, a: 1 };
+  return {
+    r: parseInt(hex.slice(0, 2), 16),
+    g: parseInt(hex.slice(2, 4), 16),
+    b: parseInt(hex.slice(4, 6), 16),
+    a: parseInt(hex.slice(6, 8), 16) / 255,
+  };
+}
+function lerpColor(a, b, t) {
+  const ca = parseColor(a), cb = parseColor(b);
+  const r = Math.round(ca.r + (cb.r - ca.r) * t);
+  const g = Math.round(ca.g + (cb.g - ca.g) * t);
+  const bl = Math.round(ca.b + (cb.b - ca.b) * t);
+  const al = ca.a + (cb.a - ca.a) * t;
+  return 'rgba(' + r + ',' + g + ',' + bl + ',' + al.toFixed(3) + ')';
+}
+
+function sampleTrack(track, time, easing) {
+  const keys = track.keyframes;
+  if (!keys || !keys.length) return null;
+  if (time <= keys[0].time) return keys[0].value;
+  if (time >= keys[keys.length - 1].time) return keys[keys.length - 1].value;
+  let i = 0;
+  while (i < keys.length - 2 && time > keys[i + 1].time) i++;
+  const a = keys[i], b = keys[i + 1];
+  const span = b.time - a.time;
+  let u = span <= 0.000001 ? 1 : (time - a.time) / span;
+  u = ease(easing, u);
+  if (track.property === 'fill') return lerpColor(a.value, b.value, u);
+  return a.value + (b.value - a.value) * u;
+}
+
+function gradientCss(e) {
+  if (!e.gradient || !e.gradient.stops || e.gradient.stops.length < 2) return e.fill;
+  const stops = e.gradient.stops.map(s => s.color + ' ' + (s.position * 100).toFixed(2) + '%').join(', ');
+  if (e.gradient.type === 'radial') return 'radial-gradient(circle at 50% 50%, ' + stops + ')';
+  const angle = ((e.gradient.angle + 90) % 360 + 360) % 360;
+  return 'linear-gradient(' + angle.toFixed(2) + 'deg, ' + stops + ')';
+}
+
+function svgFill(e) {
+  if (e.gradient && e.gradient.stops && e.gradient.stops.length >= 2) {
+    return 'url(#grad_' + e.id + ')';
+  }
+  return e.fill;
+}
+
+function resetElement(e) {
+  const node = document.getElementById(e.id);
+  if (!node) return;
+  node.style.left = e.x + 'px';
+  node.style.top = e.y + 'px';
+  node.style.width = e.width + 'px';
+  node.style.height = e.height + 'px';
+  node.style.opacity = e.opacity;
+  node.style.transform = 'rotate(' + e.rotation + 'deg)';
+  node.style.display = e.visible ? '' : 'none';
+  if (e.type === 'text') {
+    node.style.color = e.textColor;
+  } else if (e.type === 'rect' || e.type === 'ellipse') {
+    node.querySelector('.shape-fill').style.background = gradientCss(e);
+    const border = node.querySelector('.shape-fill');
+    if (e.strokeWidth > 0) {
+      border.style.border = e.strokeWidth + 'px solid ' + e.stroke;
+      border.style.borderRadius = e.type === 'ellipse' ? '50%' :
+        Math.max(0, Math.min(e.radius, Math.min(e.width, e.height) / 2)) + 'px';
+    } else {
+      border.style.border = '0';
+    }
+  } else {
+    const shape = node.querySelector('[data-shape]');
+    if (!shape) return;
+    if (e.type === 'line') {
+      const stroke = e.strokeWidth > 0 ? e.stroke : (e.fill || '#FFFFFF');
+      shape.setAttribute('stroke', stroke);
+      shape.setAttribute('stroke-width', Math.max(1, e.strokeWidth));
+    } else {
+      shape.setAttribute('fill', svgFill(e));
+      shape.setAttribute('stroke', e.strokeWidth > 0 ? e.stroke : 'none');
+      shape.setAttribute('stroke-width', e.strokeWidth);
+    }
+  }
+}
+
+function applyValue(element, property, value) {
+  const node = document.getElementById(element.id);
+  if (!node) return;
+  if (property === 'x' || property === 'y' || property === 'width' || property === 'height') {
+    node.style[property] = value + 'px';
+    return;
+  }
+  if (property === 'rotation') {
+    node.style.transform = 'rotate(' + value + 'deg)';
+    return;
+  }
+  if (property === 'opacity') {
+    node.style.opacity = value;
+    return;
+  }
+  if (property === 'fill') {
+    if (element.gradient) return;
+    if (element.type === 'text') {
+      node.style.color = value;
+    } else if (element.type === 'rect' || element.type === 'ellipse') {
+      const fill = node.querySelector('.shape-fill');
+      if (fill) fill.style.background = value;
+    } else {
+      const shape = node.querySelector('[data-shape]');
+      if (shape) {
+        if (element.type === 'line') shape.setAttribute('stroke', value);
+        else shape.setAttribute('fill', value);
+      }
+    }
+    return;
+  }
+  if (property === 'strokeWidth') {
+    if (element.type === 'rect' || element.type === 'ellipse') {
+      const fill = node.querySelector('.shape-fill');
+      if (fill) {
+        fill.style.borderWidth = value + 'px';
+        fill.style.borderStyle = value > 0 ? 'solid' : 'none';
+      }
+    } else {
+      const shape = node.querySelector('[data-shape]');
+      if (shape) shape.setAttribute('stroke-width', value);
+    }
+  }
+}
+
+function startFrameLoop() {
+  if (rafId) return;
+  rafId = requestAnimationFrame(frame);
+}
+
+function frame(now) {
+  rafId = 0;
+  const merged = new Map();
+  let keepGoing = false;
+  for (const act of active) {
+    const anim = animations.get(act.id);
+    if (!anim) continue;
+    let t = (now - act.start) / 1000;
+    const duration = Math.max(0.001, anim.duration);
+    if (anim.loop) {
+      t = t % duration;
+      keepGoing = true;
+    } else if (t >= duration) {
+      t = duration;
+      act.done = true;
+    } else {
+      keepGoing = true;
+    }
+    for (const track of anim.tracks) {
+      const value = sampleTrack(track, t, anim.easing);
+      if (value === null) continue;
+      if (!merged.has(track.elementId)) merged.set(track.elementId, new Map());
+      merged.get(track.elementId).set(track.property, value);
+    }
+  }
+  for (const [elementId, props] of merged) {
+    const element = byId.get(elementId);
+    if (!element) continue;
+    for (const [property, value] of props) applyValue(element, property, value);
+  }
+  if (keepGoing) rafId = requestAnimationFrame(frame);
+}
+
+function playAnimation(id) {
+  const anim = animations.get(id);
+  if (!anim) return;
+  const now = performance.now();
+  const existing = active.find(a => a.id === id);
+  if (existing) {
+    existing.start = now;
+    existing.done = false;
+  } else {
+    active.push({ id: id, start: now, done: false });
+  }
+  startFrameLoop();
+}
+
+function stopAll() {
+  active = [];
+  if (rafId) cancelAnimationFrame(rafId);
+  rafId = 0;
+  for (const element of DESIGN.elements) resetElement(element);
+}
+
+function trigger(sourceId, eventType) {
+  for (const interaction of DESIGN.interactions) {
+    if (interaction.sourceId !== sourceId || interaction.trigger !== eventType) continue;
+    if (interaction.action === 'stopAll') stopAll();
+    else if (interaction.action === 'playAnimation' && interaction.animationId) {
+      playAnimation(interaction.animationId);
+    }
+  }
+}
+
+function replay() {
+  stopAll();
+  for (const interaction of DESIGN.interactions) {
+    if (interaction.trigger === 'load') trigger(interaction.sourceId, 'load');
+  }
+}
+
+function playAll() {
+  stopAll();
+  for (const anim of DESIGN.animations) playAnimation(anim.id);
+}
+
+const interactive = new Set();
+for (const interaction of DESIGN.interactions) {
+  if (interaction.trigger === 'click' || interaction.trigger === 'hover') {
+    interactive.add(interaction.sourceId);
+  }
+}
+for (const element of DESIGN.elements) {
+  const node = document.getElementById(element.id);
+  if (!node) continue;
+  node.addEventListener('click', () => trigger(element.id, 'click'));
+  node.addEventListener('mouseenter', () => trigger(element.id, 'hover'));
+  node.addEventListener('mouseleave', () => trigger(element.id, 'leave'));
+  if (interactive.has(element.id)) {
+    node.style.cursor = 'pointer';
+    node.setAttribute('tabindex', '0');
+    node.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        trigger(element.id, 'click');
+      }
+    });
+  }
+}
+
+window.DeepDesign = { playAnimation, stopAll, replay, playAll, design: DESIGN };
+const urlParams = new URLSearchParams(location.search);
+if (!urlParams.has('noanim')) {
+  setTimeout(replay, 60);
+}
+</script>
+</body>
+</html>

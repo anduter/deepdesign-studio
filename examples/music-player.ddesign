@@ -1,0 +1,1488 @@
+{
+  "format": "DeepDesign",
+  "version": 1,
+  "generator": "DeepDesign Studio 1.0 (examples generator)",
+  "title": "音乐播放器 · Aurora",
+  "canvas": {
+    "width": 1280,
+    "height": 800,
+    "background": "#0A0D14"
+  },
+  "elements": [
+    {
+      "id": "bg_glow_1",
+      "type": "ellipse",
+      "name": "背景光晕 1",
+      "x": -220,
+      "y": -240,
+      "width": 700,
+      "height": 700,
+      "rotation": 0,
+      "opacity": 0.5,
+      "fill": "#13325C",
+      "stroke": "#13325C",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "bg_glow_2",
+      "type": "ellipse",
+      "name": "背景光晕 2",
+      "x": 900,
+      "y": 420,
+      "width": 620,
+      "height": 620,
+      "rotation": 0,
+      "opacity": 0.45,
+      "fill": "#3B1F4E",
+      "stroke": "#3B1F4E",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "bg_star",
+      "type": "star",
+      "name": "背景星点",
+      "x": 1110,
+      "y": 130,
+      "width": 60,
+      "height": 60,
+      "rotation": 14,
+      "opacity": 0.55,
+      "fill": "#FFB454",
+      "stroke": "#FFB454",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "sides": 5
+    },
+    {
+      "id": "player_card",
+      "type": "rect",
+      "name": "播放器主卡片",
+      "x": 100,
+      "y": 86,
+      "width": 1080,
+      "height": 628,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#111826",
+      "stroke": "#1F2B40",
+      "strokeWidth": 1.5,
+      "visible": true,
+      "locked": false,
+      "radius": 30,
+      "gradient": {
+        "type": "linear",
+        "angle": 135,
+        "stops": [
+          {
+            "position": 0.0,
+            "color": "#151F30"
+          },
+          {
+            "position": 1.0,
+            "color": "#0C111C"
+          }
+        ]
+      }
+    },
+    {
+      "id": "album_card",
+      "type": "rect",
+      "name": "专辑封面卡片",
+      "x": 136,
+      "y": 122,
+      "width": 396,
+      "height": 556,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#161F2F",
+      "stroke": "#24324A",
+      "strokeWidth": 1,
+      "visible": true,
+      "locked": false,
+      "radius": 24,
+      "gradient": {
+        "type": "linear",
+        "angle": 90,
+        "stops": [
+          {
+            "position": 0.0,
+            "color": "#1B2638"
+          },
+          {
+            "position": 1.0,
+            "color": "#101724"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cover",
+      "type": "rect",
+      "name": "专辑封面",
+      "x": 164,
+      "y": 150,
+      "width": 340,
+      "height": 340,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#1B2A45",
+      "stroke": "#2D8CEB",
+      "strokeWidth": 1.5,
+      "visible": true,
+      "locked": false,
+      "radius": 20,
+      "gradient": {
+        "type": "linear",
+        "angle": 135,
+        "stops": [
+          {
+            "position": 0.0,
+            "color": "#233A5C"
+          },
+          {
+            "position": 1.0,
+            "color": "#0F1725"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vinyl",
+      "type": "ellipse",
+      "name": "唱片",
+      "x": 204,
+      "y": 190,
+      "width": 260,
+      "height": 260,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#2D8CEB",
+      "stroke": "#2D8CEB",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "vinyl_ring",
+      "type": "ellipse",
+      "name": "唱片纹路",
+      "x": 236,
+      "y": 222,
+      "width": 196,
+      "height": 196,
+      "rotation": 0,
+      "opacity": 0.95,
+      "fill": "#0F1725",
+      "stroke": "#FFFFFF",
+      "strokeWidth": 3,
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "vinyl_hole",
+      "type": "ellipse",
+      "name": "唱片中心",
+      "x": 300,
+      "y": 286,
+      "width": 68,
+      "height": 68,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#EAF3FF",
+      "stroke": "#EAF3FF",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "album_badge",
+      "type": "text",
+      "name": "专辑标签",
+      "x": 164,
+      "y": 506,
+      "width": 180,
+      "height": 22,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "NOW PLAYING",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": true,
+      "align": "left",
+      "textColor": "#5AA9F0"
+    },
+    {
+      "id": "album_title",
+      "type": "text",
+      "name": "专辑标题",
+      "x": 164,
+      "y": 530,
+      "width": 340,
+      "height": 36,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "AURORA NIGHTS",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 23,
+      "bold": true,
+      "align": "left",
+      "textColor": "#F4F7FF"
+    },
+    {
+      "id": "album_artist",
+      "type": "text",
+      "name": "专辑艺人",
+      "x": 164,
+      "y": 566,
+      "width": 340,
+      "height": 24,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "DeepSeek Waves",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 13,
+      "bold": false,
+      "align": "left",
+      "textColor": "#8B97AC"
+    },
+    {
+      "id": "progress_bg",
+      "type": "rect",
+      "name": "进度条背景",
+      "x": 164,
+      "y": 612,
+      "width": 340,
+      "height": 4,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#26324A",
+      "stroke": "#26324A",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "radius": 2
+    },
+    {
+      "id": "progress",
+      "type": "rect",
+      "name": "播放进度",
+      "x": 164,
+      "y": 612,
+      "width": 148,
+      "height": 4,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#2D8CEB",
+      "stroke": "#2D8CEB",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "radius": 2
+    },
+    {
+      "id": "time_now",
+      "type": "text",
+      "name": "已播放时间",
+      "x": 164,
+      "y": 626,
+      "width": 60,
+      "height": 20,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "0:48",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": false,
+      "align": "left",
+      "textColor": "#7E8CA3"
+    },
+    {
+      "id": "time_total",
+      "type": "text",
+      "name": "总时长",
+      "x": 444,
+      "y": 626,
+      "width": 60,
+      "height": 20,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "3:12",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": false,
+      "align": "right",
+      "textColor": "#7E8CA3"
+    },
+    {
+      "id": "playing_label",
+      "type": "text",
+      "name": "播放状态",
+      "x": 620,
+      "y": 140,
+      "width": 300,
+      "height": 22,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "正在播放",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 12,
+      "bold": true,
+      "align": "left",
+      "textColor": "#5AA9F0"
+    },
+    {
+      "id": "track_title",
+      "type": "text",
+      "name": "歌曲标题",
+      "x": 620,
+      "y": 166,
+      "width": 540,
+      "height": 48,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "Aurora Nights",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 36,
+      "bold": true,
+      "align": "left",
+      "textColor": "#F4F7FF"
+    },
+    {
+      "id": "track_artist",
+      "type": "text",
+      "name": "歌曲艺人",
+      "x": 620,
+      "y": 214,
+      "width": 540,
+      "height": 26,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "DeepSeek Waves · 氛围电子",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 15,
+      "bold": false,
+      "align": "left",
+      "textColor": "#8B97AC"
+    },
+    {
+      "id": "like_star",
+      "type": "star",
+      "name": "收藏星标",
+      "x": 1110,
+      "y": 178,
+      "width": 52,
+      "height": 52,
+      "rotation": 8,
+      "opacity": 0.9,
+      "fill": "#FFB454",
+      "stroke": "#FFB454",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "sides": 5
+    },
+    {
+      "id": "playlist_card",
+      "type": "rect",
+      "name": "播放列表",
+      "x": 620,
+      "y": 260,
+      "width": 540,
+      "height": 350,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#0D1420",
+      "stroke": "#1E2A3D",
+      "strokeWidth": 1,
+      "visible": true,
+      "locked": false,
+      "radius": 22
+    },
+    {
+      "id": "active_row",
+      "type": "rect",
+      "name": "当前播放行",
+      "x": 638,
+      "y": 278,
+      "width": 504,
+      "height": 58,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#16233A",
+      "stroke": "#16233A",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "radius": 14
+    },
+    {
+      "id": "active_dot",
+      "type": "ellipse",
+      "name": "播放指示点",
+      "x": 656,
+      "y": 300,
+      "width": 10,
+      "height": 10,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#2D8CEB",
+      "stroke": "#2D8CEB",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "track_1",
+      "type": "text",
+      "name": "曲目 1",
+      "x": 682,
+      "y": 286,
+      "width": 330,
+      "height": 42,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "Aurora Nights",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 15,
+      "bold": true,
+      "align": "left",
+      "textColor": "#F4F7FF"
+    },
+    {
+      "id": "track_1_artist",
+      "type": "text",
+      "name": "曲目 1 艺人",
+      "x": 682,
+      "y": 310,
+      "width": 330,
+      "height": 20,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "DeepSeek Waves",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": false,
+      "align": "left",
+      "textColor": "#7E8CA3"
+    },
+    {
+      "id": "track_1_time",
+      "type": "text",
+      "name": "曲目 1 时长",
+      "x": 1064,
+      "y": 288,
+      "width": 60,
+      "height": 40,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "3:12",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": false,
+      "align": "right",
+      "textColor": "#8B97AC"
+    },
+    {
+      "id": "track_2",
+      "type": "text",
+      "name": "曲目 2",
+      "x": 682,
+      "y": 350,
+      "width": 300,
+      "height": 34,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "Neon Tides",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 14,
+      "bold": false,
+      "align": "left",
+      "textColor": "#C7D2E3"
+    },
+    {
+      "id": "track_2_artist",
+      "type": "text",
+      "name": "曲目 2 艺人",
+      "x": 682,
+      "y": 376,
+      "width": 300,
+      "height": 20,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "Mirage Unit",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": false,
+      "align": "left",
+      "textColor": "#6F7B90"
+    },
+    {
+      "id": "track_2_time",
+      "type": "text",
+      "name": "曲目 2 时长",
+      "x": 1064,
+      "y": 358,
+      "width": 60,
+      "height": 30,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "4:05",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": false,
+      "align": "right",
+      "textColor": "#6F7B90"
+    },
+    {
+      "id": "row_sep_2",
+      "type": "line",
+      "name": "分隔线 2",
+      "x": 656,
+      "y": 410,
+      "width": 468,
+      "height": 1,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#1B2536",
+      "stroke": "#1B2536",
+      "strokeWidth": 1,
+      "visible": true,
+      "locked": false,
+      "lineStart": [
+        0,
+        0
+      ],
+      "lineEnd": [
+        1,
+        0
+      ]
+    },
+    {
+      "id": "track_3",
+      "type": "text",
+      "name": "曲目 3",
+      "x": 682,
+      "y": 426,
+      "width": 300,
+      "height": 34,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "Glass Horizon",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 14,
+      "bold": false,
+      "align": "left",
+      "textColor": "#C7D2E3"
+    },
+    {
+      "id": "track_3_artist",
+      "type": "text",
+      "name": "曲目 3 艺人",
+      "x": 682,
+      "y": 452,
+      "width": 300,
+      "height": 20,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "Lumen Field",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": false,
+      "align": "left",
+      "textColor": "#6F7B90"
+    },
+    {
+      "id": "track_3_time",
+      "type": "text",
+      "name": "曲目 3 时长",
+      "x": 1064,
+      "y": 434,
+      "width": 60,
+      "height": 30,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "3:48",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": false,
+      "align": "right",
+      "textColor": "#6F7B90"
+    },
+    {
+      "id": "row_sep_3",
+      "type": "line",
+      "name": "分隔线 3",
+      "x": 656,
+      "y": 486,
+      "width": 468,
+      "height": 1,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#1B2536",
+      "stroke": "#1B2536",
+      "strokeWidth": 1,
+      "visible": true,
+      "locked": false,
+      "lineStart": [
+        0,
+        0
+      ],
+      "lineEnd": [
+        1,
+        0
+      ]
+    },
+    {
+      "id": "track_4",
+      "type": "text",
+      "name": "曲目 4",
+      "x": 682,
+      "y": 502,
+      "width": 300,
+      "height": 34,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "Silent Orbit",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 14,
+      "bold": false,
+      "align": "left",
+      "textColor": "#C7D2E3"
+    },
+    {
+      "id": "track_4_artist",
+      "type": "text",
+      "name": "曲目 4 艺人",
+      "x": 682,
+      "y": 528,
+      "width": 300,
+      "height": 20,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "DeepSeek Waves",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": false,
+      "align": "left",
+      "textColor": "#6F7B90"
+    },
+    {
+      "id": "track_4_time",
+      "type": "text",
+      "name": "曲目 4 时长",
+      "x": 1064,
+      "y": 510,
+      "width": 60,
+      "height": 30,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "5:21",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": false,
+      "align": "right",
+      "textColor": "#6F7B90"
+    },
+    {
+      "id": "ctrl_prev",
+      "type": "ellipse",
+      "name": "上一首按钮",
+      "x": 640,
+      "y": 650,
+      "width": 54,
+      "height": 54,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#182234",
+      "stroke": "#2A3854",
+      "strokeWidth": 1,
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "ctrl_prev_icon",
+      "type": "polygon",
+      "name": "上一首图标",
+      "x": 653,
+      "y": 663,
+      "width": 28,
+      "height": 28,
+      "rotation": -90,
+      "opacity": 1,
+      "fill": "#C7D2E3",
+      "stroke": "#C7D2E3",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "sides": 3
+    },
+    {
+      "id": "play_button",
+      "type": "ellipse",
+      "name": "播放按钮",
+      "x": 726,
+      "y": 636,
+      "width": 82,
+      "height": 82,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#2D8CEB",
+      "stroke": "#70A9F2",
+      "strokeWidth": 1,
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "play_icon",
+      "type": "polygon",
+      "name": "播放图标",
+      "x": 754,
+      "y": 661,
+      "width": 30,
+      "height": 34,
+      "rotation": 90,
+      "opacity": 1,
+      "fill": "#FFFFFF",
+      "stroke": "#FFFFFF",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "sides": 3
+    },
+    {
+      "id": "ctrl_next",
+      "type": "ellipse",
+      "name": "下一首按钮",
+      "x": 840,
+      "y": 650,
+      "width": 54,
+      "height": 54,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#182234",
+      "stroke": "#2A3854",
+      "strokeWidth": 1,
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "ctrl_next_icon",
+      "type": "polygon",
+      "name": "下一首图标",
+      "x": 853,
+      "y": 663,
+      "width": 28,
+      "height": 28,
+      "rotation": 90,
+      "opacity": 1,
+      "fill": "#C7D2E3",
+      "stroke": "#C7D2E3",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "sides": 3
+    },
+    {
+      "id": "eq_1",
+      "type": "rect",
+      "name": "频谱柱 1",
+      "x": 934,
+      "y": 676,
+      "width": 8,
+      "height": 24,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#2D8CEB",
+      "stroke": "#2D8CEB",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "radius": 4
+    },
+    {
+      "id": "eq_2",
+      "type": "rect",
+      "name": "频谱柱 2",
+      "x": 950,
+      "y": 664,
+      "width": 8,
+      "height": 36,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#5AA9F0",
+      "stroke": "#5AA9F0",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "radius": 4
+    },
+    {
+      "id": "eq_3",
+      "type": "rect",
+      "name": "频谱柱 3",
+      "x": 966,
+      "y": 682,
+      "width": 8,
+      "height": 18,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#A47BFF",
+      "stroke": "#A47BFF",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "radius": 4
+    },
+    {
+      "id": "eq_label",
+      "type": "text",
+      "name": "频谱标签",
+      "x": 998,
+      "y": 668,
+      "width": 120,
+      "height": 30,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "visible": true,
+      "locked": false,
+      "text": "LIVE MIX",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 11,
+      "bold": true,
+      "align": "left",
+      "textColor": "#5AA9F0"
+    }
+  ],
+  "animations": [
+    {
+      "id": "anim_music_intro",
+      "name": "播放器入场",
+      "duration": 1.25,
+      "loop": false,
+      "easing": "easeOutCubic",
+      "tracks": [
+        {
+          "elementId": "player_card",
+          "property": "opacity",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "elementId": "player_card",
+          "property": "y",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 116
+            },
+            {
+              "time": 0.8,
+              "value": 86
+            }
+          ]
+        },
+        {
+          "elementId": "album_card",
+          "property": "opacity",
+          "keyframes": [
+            {
+              "time": 0.08,
+              "value": 0
+            },
+            {
+              "time": 0.8,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "elementId": "album_card",
+          "property": "x",
+          "keyframes": [
+            {
+              "time": 0.08,
+              "value": 108
+            },
+            {
+              "time": 0.8,
+              "value": 136
+            }
+          ]
+        },
+        {
+          "elementId": "cover",
+          "property": "rotation",
+          "keyframes": [
+            {
+              "time": 0.15,
+              "value": -8
+            },
+            {
+              "time": 0.9,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "elementId": "track_title",
+          "property": "x",
+          "keyframes": [
+            {
+              "time": 0.2,
+              "value": 660
+            },
+            {
+              "time": 0.95,
+              "value": 620
+            }
+          ]
+        },
+        {
+          "elementId": "track_title",
+          "property": "opacity",
+          "keyframes": [
+            {
+              "time": 0.2,
+              "value": 0
+            },
+            {
+              "time": 0.95,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "elementId": "track_artist",
+          "property": "opacity",
+          "keyframes": [
+            {
+              "time": 0.3,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "elementId": "playlist_card",
+          "property": "opacity",
+          "keyframes": [
+            {
+              "time": 0.3,
+              "value": 0
+            },
+            {
+              "time": 1.05,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "elementId": "playlist_card",
+          "property": "y",
+          "keyframes": [
+            {
+              "time": 0.3,
+              "value": 286
+            },
+            {
+              "time": 1.05,
+              "value": 260
+            }
+          ]
+        },
+        {
+          "elementId": "play_button",
+          "property": "opacity",
+          "keyframes": [
+            {
+              "time": 0.5,
+              "value": 0
+            },
+            {
+              "time": 1.15,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "elementId": "ctrl_prev",
+          "property": "opacity",
+          "keyframes": [
+            {
+              "time": 0.55,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "elementId": "ctrl_next",
+          "property": "opacity",
+          "keyframes": [
+            {
+              "time": 0.55,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anim_play_pulse",
+      "name": "播放脉冲",
+      "duration": 1.6,
+      "loop": true,
+      "easing": "easeInOutCubic",
+      "tracks": [
+        {
+          "elementId": "play_button",
+          "property": "fill",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": "#2D8CEB"
+            },
+            {
+              "time": 0.8,
+              "value": "#3DDC97"
+            },
+            {
+              "time": 1.6,
+              "value": "#2D8CEB"
+            }
+          ]
+        },
+        {
+          "elementId": "progress",
+          "property": "width",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 148
+            },
+            {
+              "time": 1.6,
+              "value": 340
+            }
+          ]
+        },
+        {
+          "elementId": "vinyl_ring",
+          "property": "rotation",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1.6,
+              "value": 360
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anim_equalizer",
+      "name": "频谱律动",
+      "duration": 0.8,
+      "loop": true,
+      "easing": "easeInOutCubic",
+      "tracks": [
+        {
+          "elementId": "eq_1",
+          "property": "height",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 10
+            },
+            {
+              "time": 0.2,
+              "value": 34
+            },
+            {
+              "time": 0.4,
+              "value": 14
+            },
+            {
+              "time": 0.6,
+              "value": 40
+            },
+            {
+              "time": 0.8,
+              "value": 10
+            }
+          ]
+        },
+        {
+          "elementId": "eq_1",
+          "property": "y",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 690
+            },
+            {
+              "time": 0.2,
+              "value": 666
+            },
+            {
+              "time": 0.4,
+              "value": 686
+            },
+            {
+              "time": 0.6,
+              "value": 660
+            },
+            {
+              "time": 0.8,
+              "value": 690
+            }
+          ]
+        },
+        {
+          "elementId": "eq_2",
+          "property": "height",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 30
+            },
+            {
+              "time": 0.2,
+              "value": 12
+            },
+            {
+              "time": 0.4,
+              "value": 38
+            },
+            {
+              "time": 0.6,
+              "value": 20
+            },
+            {
+              "time": 0.8,
+              "value": 30
+            }
+          ]
+        },
+        {
+          "elementId": "eq_2",
+          "property": "y",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 670
+            },
+            {
+              "time": 0.2,
+              "value": 688
+            },
+            {
+              "time": 0.4,
+              "value": 662
+            },
+            {
+              "time": 0.6,
+              "value": 680
+            },
+            {
+              "time": 0.8,
+              "value": 670
+            }
+          ]
+        },
+        {
+          "elementId": "eq_3",
+          "property": "height",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 18
+            },
+            {
+              "time": 0.2,
+              "value": 42
+            },
+            {
+              "time": 0.4,
+              "value": 16
+            },
+            {
+              "time": 0.6,
+              "value": 32
+            },
+            {
+              "time": 0.8,
+              "value": 18
+            }
+          ]
+        },
+        {
+          "elementId": "eq_3",
+          "property": "y",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 682
+            },
+            {
+              "time": 0.2,
+              "value": 658
+            },
+            {
+              "time": 0.4,
+              "value": 684
+            },
+            {
+              "time": 0.6,
+              "value": 668
+            },
+            {
+              "time": 0.8,
+              "value": 682
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anim_cover_hover",
+      "name": "封面悬停",
+      "duration": 0.4,
+      "loop": false,
+      "easing": "easeOutBack",
+      "tracks": [
+        {
+          "elementId": "cover",
+          "property": "x",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 164
+            },
+            {
+              "time": 0.4,
+              "value": 158
+            }
+          ]
+        },
+        {
+          "elementId": "cover",
+          "property": "y",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 150
+            },
+            {
+              "time": 0.4,
+              "value": 144
+            }
+          ]
+        },
+        {
+          "elementId": "cover",
+          "property": "width",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 340
+            },
+            {
+              "time": 0.4,
+              "value": 352
+            }
+          ]
+        },
+        {
+          "elementId": "cover",
+          "property": "height",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 340
+            },
+            {
+              "time": 0.4,
+              "value": 352
+            }
+          ]
+        },
+        {
+          "elementId": "like_star",
+          "property": "rotation",
+          "keyframes": [
+            {
+              "time": 0,
+              "value": 8
+            },
+            {
+              "time": 0.4,
+              "value": 28
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "sourceId": "player_card",
+      "trigger": "load",
+      "action": "playAnimation",
+      "animationId": "anim_music_intro"
+    },
+    {
+      "sourceId": "cover",
+      "trigger": "hover",
+      "action": "playAnimation",
+      "animationId": "anim_cover_hover"
+    },
+    {
+      "sourceId": "play_button",
+      "trigger": "click",
+      "action": "playAnimation",
+      "animationId": "anim_play_pulse"
+    },
+    {
+      "sourceId": "play_button",
+      "trigger": "click",
+      "action": "playAnimation",
+      "animationId": "anim_equalizer"
+    },
+    {
+      "sourceId": "ctrl_next",
+      "trigger": "click",
+      "action": "playAnimation",
+      "animationId": "anim_play_pulse"
+    }
+  ]
+}

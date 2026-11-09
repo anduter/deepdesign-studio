@@ -1,0 +1,939 @@
+{
+    "animations": [
+        {
+            "duration": 1.2,
+            "easing": "easeOutCubic",
+            "id": "anim_intro",
+            "loop": false,
+            "name": "入场动画",
+            "tracks": [
+                {
+                    "elementId": "login_card",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": 0
+                        },
+                        {
+                            "time": 0.55,
+                            "value": 1
+                        }
+                    ],
+                    "property": "opacity"
+                },
+                {
+                    "elementId": "login_card",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": 118
+                        },
+                        {
+                            "time": 0.7,
+                            "value": 90
+                        }
+                    ],
+                    "property": "y"
+                },
+                {
+                    "elementId": "logo_card",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": -90
+                        },
+                        {
+                            "time": 0.75,
+                            "value": 0
+                        }
+                    ],
+                    "property": "rotation"
+                },
+                {
+                    "elementId": "logo_card",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": 0
+                        },
+                        {
+                            "time": 0.45,
+                            "value": 1
+                        }
+                    ],
+                    "property": "opacity"
+                },
+                {
+                    "elementId": "logo_letter",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": 0
+                        },
+                        {
+                            "time": 0.55,
+                            "value": 1
+                        }
+                    ],
+                    "property": "opacity"
+                },
+                {
+                    "elementId": "title",
+                    "keyframes": [
+                        {
+                            "time": 0.1,
+                            "value": 266
+                        },
+                        {
+                            "time": 0.75,
+                            "value": 232
+                        }
+                    ],
+                    "property": "y"
+                },
+                {
+                    "elementId": "title",
+                    "keyframes": [
+                        {
+                            "time": 0.1,
+                            "value": 0
+                        },
+                        {
+                            "time": 0.75,
+                            "value": 1
+                        }
+                    ],
+                    "property": "opacity"
+                },
+                {
+                    "elementId": "subtitle",
+                    "keyframes": [
+                        {
+                            "time": 0.18,
+                            "value": 324
+                        },
+                        {
+                            "time": 0.85,
+                            "value": 292
+                        }
+                    ],
+                    "property": "y"
+                },
+                {
+                    "elementId": "subtitle",
+                    "keyframes": [
+                        {
+                            "time": 0.18,
+                            "value": 0
+                        },
+                        {
+                            "time": 0.85,
+                            "value": 1
+                        }
+                    ],
+                    "property": "opacity"
+                },
+                {
+                    "elementId": "email_input",
+                    "keyframes": [
+                        {
+                            "time": 0.3,
+                            "value": 420
+                        },
+                        {
+                            "time": 0.9,
+                            "value": 450
+                        }
+                    ],
+                    "property": "x"
+                },
+                {
+                    "elementId": "email_input",
+                    "keyframes": [
+                        {
+                            "time": 0.3,
+                            "value": 0
+                        },
+                        {
+                            "time": 0.9,
+                            "value": 1
+                        }
+                    ],
+                    "property": "opacity"
+                },
+                {
+                    "elementId": "password_input",
+                    "keyframes": [
+                        {
+                            "time": 0.38,
+                            "value": 410
+                        },
+                        {
+                            "time": 0.98,
+                            "value": 450
+                        }
+                    ],
+                    "property": "x"
+                },
+                {
+                    "elementId": "password_input",
+                    "keyframes": [
+                        {
+                            "time": 0.38,
+                            "value": 0
+                        },
+                        {
+                            "time": 0.98,
+                            "value": 1
+                        }
+                    ],
+                    "property": "opacity"
+                },
+                {
+                    "elementId": "login_button",
+                    "keyframes": [
+                        {
+                            "time": 0.45,
+                            "value": 580
+                        },
+                        {
+                            "time": 1.05,
+                            "value": 548
+                        }
+                    ],
+                    "property": "y"
+                },
+                {
+                    "elementId": "login_button",
+                    "keyframes": [
+                        {
+                            "time": 0.45,
+                            "value": 0
+                        },
+                        {
+                            "time": 1.05,
+                            "value": 1
+                        }
+                    ],
+                    "property": "opacity"
+                },
+                {
+                    "elementId": "login_button_text",
+                    "keyframes": [
+                        {
+                            "time": 0.55,
+                            "value": 0
+                        },
+                        {
+                            "time": 1.1,
+                            "value": 1
+                        }
+                    ],
+                    "property": "opacity"
+                }
+            ]
+        },
+        {
+            "duration": 0.32,
+            "easing": "easeOutCubic",
+            "id": "anim_login_hover",
+            "loop": false,
+            "name": "按钮悬停",
+            "tracks": [
+                {
+                    "elementId": "login_button",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": "#2D8CEB"
+                        },
+                        {
+                            "time": 0.32,
+                            "value": "#3D9CFA"
+                        }
+                    ],
+                    "property": "fill"
+                },
+                {
+                    "elementId": "login_button",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": 450
+                        },
+                        {
+                            "time": 0.32,
+                            "value": 446
+                        }
+                    ],
+                    "property": "x"
+                },
+                {
+                    "elementId": "login_button",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": 380
+                        },
+                        {
+                            "time": 0.32,
+                            "value": 388
+                        }
+                    ],
+                    "property": "width"
+                },
+                {
+                    "elementId": "login_button",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": 548
+                        },
+                        {
+                            "time": 0.32,
+                            "value": 544
+                        }
+                    ],
+                    "property": "y"
+                },
+                {
+                    "elementId": "login_button",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": 58
+                        },
+                        {
+                            "time": 0.32,
+                            "value": 66
+                        }
+                    ],
+                    "property": "height"
+                }
+            ]
+        },
+        {
+            "duration": 0.55,
+            "easing": "easeInOutCubic",
+            "id": "anim_login_click",
+            "loop": false,
+            "name": "登录点击反馈",
+            "tracks": [
+                {
+                    "elementId": "login_button",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": "#2D8CEB"
+                        },
+                        {
+                            "time": 0.22,
+                            "value": "#3DDC97"
+                        },
+                        {
+                            "time": 0.36,
+                            "value": "#3DDC97"
+                        },
+                        {
+                            "time": 0.55,
+                            "value": "#2D8CEB"
+                        }
+                    ],
+                    "property": "fill"
+                },
+                {
+                    "elementId": "login_card",
+                    "keyframes": [
+                        {
+                            "time": 0,
+                            "value": 0
+                        },
+                        {
+                            "time": 0.18,
+                            "value": -0.8
+                        },
+                        {
+                            "time": 0.36,
+                            "value": 0.8
+                        },
+                        {
+                            "time": 0.55,
+                            "value": 0
+                        }
+                    ],
+                    "property": "rotation"
+                }
+            ]
+        }
+    ],
+    "canvas": {
+        "background": "#0A0F1A",
+        "height": 800,
+        "width": 1280
+    },
+    "elements": [
+        {
+            "fill": "#12335F",
+            "height": 650,
+            "id": "glow_blue",
+            "locked": false,
+            "name": "蓝色光晕",
+            "opacity": 0.55,
+            "rotation": 0,
+            "stroke": "#12335F",
+            "strokeWidth": 0,
+            "type": "ellipse",
+            "visible": true,
+            "width": 650,
+            "x": -170,
+            "y": -190
+        },
+        {
+            "fill": "#2B1A4A",
+            "height": 500,
+            "id": "glow_violet",
+            "locked": false,
+            "name": "紫色光晕",
+            "opacity": 0.55,
+            "rotation": 0,
+            "stroke": "#2B1A4A",
+            "strokeWidth": 0,
+            "type": "ellipse",
+            "visible": true,
+            "width": 500,
+            "x": 900,
+            "y": 480
+        },
+        {
+            "closed": true,
+            "fill": "#10233A",
+            "height": 180,
+            "id": "wave",
+            "locked": false,
+            "name": "底部波纹",
+            "opacity": 0.7,
+            "points": [
+                [
+                    0,
+                    0.55
+                ],
+                [
+                    0.16,
+                    0.25
+                ],
+                [
+                    0.32,
+                    0.48
+                ],
+                [
+                    0.5,
+                    0.18
+                ],
+                [
+                    0.68,
+                    0.42
+                ],
+                [
+                    0.84,
+                    0.2
+                ],
+                [
+                    1,
+                    0.5
+                ],
+                [
+                    1,
+                    1
+                ],
+                [
+                    0,
+                    1
+                ]
+            ],
+            "rotation": 0,
+            "stroke": "#10233A",
+            "strokeWidth": 0,
+            "type": "path",
+            "visible": true,
+            "width": 1280,
+            "x": 0,
+            "y": 620
+        },
+        {
+            "fill": "#5AA9F0",
+            "height": 44,
+            "id": "deco_star_1",
+            "locked": false,
+            "name": "装饰星",
+            "opacity": 0.5,
+            "rotation": 12,
+            "sides": 5,
+            "stroke": "#5AA9F0",
+            "strokeWidth": 0,
+            "type": "star",
+            "visible": true,
+            "width": 44,
+            "x": 1030,
+            "y": 170
+        },
+        {
+            "fill": "#A47BFF",
+            "height": 26,
+            "id": "deco_star_2",
+            "locked": false,
+            "name": "装饰星 2",
+            "opacity": 0.6,
+            "rotation": -12,
+            "sides": 5,
+            "stroke": "#A47BFF",
+            "strokeWidth": 0,
+            "type": "star",
+            "visible": true,
+            "width": 26,
+            "x": 250,
+            "y": 610
+        },
+        {
+            "fill": "#1A2B46",
+            "height": 92,
+            "id": "deco_hex",
+            "locked": false,
+            "name": "装饰六边形",
+            "opacity": 0.8,
+            "rotation": 18,
+            "sides": 6,
+            "stroke": "#1A2B46",
+            "strokeWidth": 0,
+            "type": "polygon",
+            "visible": true,
+            "width": 92,
+            "x": 1060,
+            "y": 640
+        },
+        {
+            "fill": "#121A2B",
+            "gradient": {
+                "angle": 135,
+                "stops": [
+                    {
+                        "color": "#1A2740",
+                        "position": 0
+                    },
+                    {
+                        "color": "#111A2A",
+                        "position": 0.6
+                    },
+                    {
+                        "color": "#0D1421",
+                        "position": 1
+                    }
+                ],
+                "type": "linear"
+            },
+            "height": 620,
+            "id": "login_card",
+            "locked": false,
+            "name": "登录卡片",
+            "opacity": 1,
+            "radius": 28,
+            "rotation": 0,
+            "stroke": "#23304A",
+            "strokeWidth": 1.5,
+            "type": "rect",
+            "visible": true,
+            "width": 520,
+            "x": 380,
+            "y": 90
+        },
+        {
+            "fill": "#2D8CEB",
+            "gradient": {
+                "angle": 135,
+                "stops": [
+                    {
+                        "color": "#5AA9F0",
+                        "position": 0
+                    },
+                    {
+                        "color": "#2D8CEB",
+                        "position": 1
+                    }
+                ],
+                "type": "linear"
+            },
+            "height": 72,
+            "id": "logo_card",
+            "locked": false,
+            "name": "品牌标记",
+            "opacity": 1,
+            "radius": 18,
+            "rotation": 0,
+            "stroke": "#5AA9F0",
+            "strokeWidth": 1,
+            "type": "rect",
+            "visible": true,
+            "width": 72,
+            "x": 604,
+            "y": 126
+        },
+        {
+            "align": "center",
+            "bold": true,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 36,
+            "height": 72,
+            "id": "logo_letter",
+            "locked": false,
+            "name": "品牌字母",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "D",
+            "textColor": "#FFFFFF",
+            "type": "text",
+            "visible": true,
+            "width": 72,
+            "x": 604,
+            "y": 126
+        },
+        {
+            "align": "center",
+            "bold": true,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 36,
+            "height": 52,
+            "id": "title",
+            "locked": false,
+            "name": "欢迎标题",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "欢迎回来",
+            "textColor": "#F4F7FF",
+            "type": "text",
+            "visible": true,
+            "width": 520,
+            "x": 380,
+            "y": 232
+        },
+        {
+            "align": "center",
+            "bold": false,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 14,
+            "height": 28,
+            "id": "subtitle",
+            "locked": false,
+            "name": "副标题",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "登录以继续使用灵绘云设计工作台",
+            "textColor": "#8B97AC",
+            "type": "text",
+            "visible": true,
+            "width": 520,
+            "x": 380,
+            "y": 292
+        },
+        {
+            "align": "left",
+            "bold": false,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 12,
+            "height": 22,
+            "id": "email_label",
+            "locked": false,
+            "name": "邮箱标签",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "邮箱地址",
+            "textColor": "#7E8CA3",
+            "type": "text",
+            "visible": true,
+            "width": 200,
+            "x": 450,
+            "y": 334
+        },
+        {
+            "fill": "#0A1019",
+            "height": 54,
+            "id": "email_input",
+            "locked": false,
+            "name": "邮箱输入框",
+            "opacity": 1,
+            "radius": 12,
+            "rotation": 0,
+            "stroke": "#2A3854",
+            "strokeWidth": 1,
+            "type": "rect",
+            "visible": true,
+            "width": 380,
+            "x": 450,
+            "y": 360
+        },
+        {
+            "fill": "#3DDC97",
+            "height": 8,
+            "id": "email_dot",
+            "locked": false,
+            "name": "邮箱状态点",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#3DDC97",
+            "strokeWidth": 0,
+            "type": "ellipse",
+            "visible": true,
+            "width": 8,
+            "x": 466,
+            "y": 382
+        },
+        {
+            "align": "left",
+            "bold": false,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 14,
+            "height": 54,
+            "id": "email_text",
+            "locked": false,
+            "name": "邮箱内容",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "hello@deepdesign.ai",
+            "textColor": "#C7D2E3",
+            "type": "text",
+            "visible": true,
+            "width": 322,
+            "x": 486,
+            "y": 360
+        },
+        {
+            "align": "left",
+            "bold": false,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 12,
+            "height": 22,
+            "id": "password_label",
+            "locked": false,
+            "name": "密码标签",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "密码",
+            "textColor": "#7E8CA3",
+            "type": "text",
+            "visible": true,
+            "width": 200,
+            "x": 450,
+            "y": 430
+        },
+        {
+            "fill": "#0A1019",
+            "height": 54,
+            "id": "password_input",
+            "locked": false,
+            "name": "密码输入框",
+            "opacity": 1,
+            "radius": 12,
+            "rotation": 0,
+            "stroke": "#2A3854",
+            "strokeWidth": 1,
+            "type": "rect",
+            "visible": true,
+            "width": 380,
+            "x": 450,
+            "y": 456
+        },
+        {
+            "align": "left",
+            "bold": false,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 15,
+            "height": 54,
+            "id": "password_text",
+            "locked": false,
+            "name": "密码占位",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "••••••••••",
+            "textColor": "#C7D2E3",
+            "type": "text",
+            "visible": true,
+            "width": 330,
+            "x": 470,
+            "y": 456
+        },
+        {
+            "align": "right",
+            "bold": false,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 12,
+            "height": 54,
+            "id": "show_password",
+            "locked": false,
+            "name": "显示密码",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "显示",
+            "textColor": "#5AA9F0",
+            "type": "text",
+            "visible": true,
+            "width": 76,
+            "x": 738,
+            "y": 456
+        },
+        {
+            "fill": "#2D8CEB",
+            "height": 58,
+            "id": "login_button",
+            "locked": false,
+            "name": "登录按钮",
+            "opacity": 1,
+            "radius": 14,
+            "rotation": 0,
+            "stroke": "#70A9F2",
+            "strokeWidth": 1,
+            "type": "rect",
+            "visible": true,
+            "width": 380,
+            "x": 450,
+            "y": 548
+        },
+        {
+            "align": "center",
+            "bold": true,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 17,
+            "height": 58,
+            "id": "login_button_text",
+            "locked": false,
+            "name": "登录按钮文字",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "登 录",
+            "textColor": "#FFFFFF",
+            "type": "text",
+            "visible": true,
+            "width": 380,
+            "x": 450,
+            "y": 548
+        },
+        {
+            "align": "right",
+            "bold": false,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 12,
+            "height": 22,
+            "id": "forgot_password",
+            "locked": false,
+            "name": "忘记密码",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "忘记密码？",
+            "textColor": "#7E8CA3",
+            "type": "text",
+            "visible": true,
+            "width": 140,
+            "x": 690,
+            "y": 620
+        },
+        {
+            "fill": "#26324A",
+            "height": 1,
+            "id": "divider",
+            "lineEnd": [
+                1,
+                0
+            ],
+            "lineStart": [
+                0,
+                0
+            ],
+            "locked": false,
+            "name": "分隔线",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#26324A",
+            "strokeWidth": 1,
+            "type": "line",
+            "visible": true,
+            "width": 380,
+            "x": 450,
+            "y": 654
+        },
+        {
+            "align": "center",
+            "bold": false,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 12,
+            "height": 24,
+            "id": "register_hint",
+            "locked": false,
+            "name": "注册提示",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "还没有账号？ 立即注册",
+            "textColor": "#8B97AC",
+            "type": "text",
+            "visible": true,
+            "width": 520,
+            "x": 380,
+            "y": 672
+        }
+    ],
+    "format": "DeepDesign",
+    "generator": "DeepDesign Studio 1.0",
+    "guides": [
+    ],
+    "interactions": [
+        {
+            "action": "playAnimation",
+            "animationId": "anim_intro",
+            "sourceId": "login_card",
+            "trigger": "load"
+        },
+        {
+            "action": "playAnimation",
+            "animationId": "anim_login_hover",
+            "sourceId": "login_button",
+            "trigger": "hover"
+        },
+        {
+            "action": "playAnimation",
+            "animationId": "anim_login_click",
+            "sourceId": "login_button",
+            "trigger": "click"
+        }
+    ],
+    "title": "登录界面 · 极光蓝",
+    "version": 1
+}

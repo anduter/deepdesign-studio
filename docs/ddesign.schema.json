@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deepdesign.local/schema/ddesign-v1.json",
+  "title": "DeepDesign Studio Design File",
+  "description": "AI-readable UI design document produced by 灵绘 DeepDesign Studio.",
+  "type": "object",
+  "required": ["format", "version", "canvas", "elements"],
+  "properties": {
+    "format": { "const": "DeepDesign" },
+    "version": { "type": "integer", "minimum": 1, "maximum": 1 },
+    "generator": { "type": "string" },
+    "title": { "type": "string" },
+    "canvas": { "$ref": "#/$defs/canvas" },
+    "elements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/element" },
+      "description": "Back-to-front layer order."
+    },
+    "animations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/animation" }
+    },
+    "interactions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/interaction" }
+    },
+    "guides": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/guide" },
+      "description": "Alignment aids. Not rendered in exported UI."
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "color": {
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$",
+      "description": "sRGB #RRGGBB or #RRGGBBAA."
+    },
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height", "background"],
+      "properties": {
+        "width": { "type": "number", "minimum": 1 },
+        "height": { "type": "number", "minimum": 1 },
+        "background": { "$ref": "#/$defs/color" }
+      },
+      "additionalProperties": true
+    },
+    "gradientStop": {
+      "type": "object",
+      "required": ["position", "color"],
+      "properties": {
+        "position": { "type": "number", "minimum": 0, "maximum": 1 },
+        "color": { "$ref": "#/$defs/color" }
+      },
+      "additionalProperties": true
+    },
+    "gradient": {
+      "type": "object",
+      "required": ["type", "angle", "stops"],
+      "properties": {
+        "type": { "enum": ["linear", "radial"] },
+        "angle": { "type": "number" },
+        "stops": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/gradientStop" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "element": {
+      "type": "object",
+      "required": ["id", "type", "x", "y", "width", "height"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "type": {
+          "enum": ["rect", "ellipse", "line", "polygon", "star", "path", "text"]
+        },
+        "name": { "type": "string" },
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
+        "rotation": { "type": "number", "default": 0 },
+        "opacity": { "type": "number", "minimum": 0, "maximum": 1, "default": 1 },
+        "fill": { "$ref": "#/$defs/color" },
+        "gradient": { "$ref": "#/$defs/gradient" },
+        "stroke": { "$ref": "#/$defs/color" },
+        "strokeWidth": { "type": "number", "minimum": 0, "default": 0 },
+        "visible": { "type": "boolean", "default": true },
+        "locked": { "type": "boolean", "default": false },
+        "radius": { "type": "number", "minimum": 0, "description": "rect only" },
+        "sides": { "type": "integer", "minimum": 3, "maximum": 60, "description": "polygon/star only" },
+        "lineStart": {
+          "type": "array",
+          "items": { "type": "number", "minimum": 0, "maximum": 1 },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "line only, normalized."
+        },
+        "lineEnd": {
+          "type": "array",
+          "items": { "type": "number", "minimum": 0, "maximum": 1 },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "line only, normalized."
+        },
+        "closed": { "type": "boolean", "default": true, "description": "path only" },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "number", "minimum": 0, "maximum": 1 },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "description": "path only, normalized coordinates."
+        },
+        "text": { "type": "string" },
+        "fontFamily": { "type": "string" },
+        "fontSize": { "type": "number", "minimum": 1 },
+        "bold": { "type": "boolean" },
+        "align": { "enum": ["left", "center", "right"] },
+        "textColor": { "$ref": "#/$defs/color" }
+      },
+      "additionalProperties": true
+    },
+    "keyframe": {
+      "type": "object",
+      "required": ["time", "value"],
+      "properties": {
+        "time": { "type": "number", "minimum": 0 },
+        "value": {
+          "oneOf": [
+            { "type": "number" },
+            { "$ref": "#/$defs/color" }
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "track": {
+      "type": "object",
+      "required": ["elementId", "property", "keyframes"],
+      "properties": {
+        "elementId": { "type": "string" },
+        "property": {
+          "enum": ["x", "y", "width", "height", "rotation", "opacity", "fill", "strokeWidth"]
+        },
+        "keyframes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/keyframe" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "animation": {
+      "type": "object",
+      "required": ["id", "name", "duration", "tracks"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "duration": { "type": "number", "exclusiveMinimum": 0 },
+        "loop": { "type": "boolean", "default": false },
+        "easing": {
+          "enum": ["linear", "easeInQuad", "easeOutQuad", "easeInOutCubic",
+                   "easeOutCubic", "easeOutBack", "easeOutElastic", "easeOutBounce"],
+          "default": "easeOutCubic"
+        },
+        "tracks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/track" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "interaction": {
+      "type": "object",
+      "required": ["sourceId", "trigger", "action"],
+      "properties": {
+        "sourceId": { "type": "string" },
+        "trigger": { "enum": ["click", "hover", "leave", "load"] },
+        "action": { "enum": ["playAnimation", "stopAll"] },
+        "animationId": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "guide": {
+      "type": "object",
+      "required": ["id", "orientation", "position"],
+      "properties": {
+        "id": { "type": "string" },
+        "orientation": { "enum": ["horizontal", "vertical"] },
+        "position": { "type": "number" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

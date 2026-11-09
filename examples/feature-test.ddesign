@@ -1,0 +1,67 @@
+{
+  "format": "DeepDesign",
+  "version": 1,
+  "generator": "DeepDesign Studio 1.0",
+  "title": "渐变与参考线测试",
+  "canvas": {
+    "width": 800,
+    "height": 600,
+    "background": "#0B1018"
+  },
+  "elements": [
+    {
+      "id": "gradient_card",
+      "type": "rect",
+      "name": "渐变卡片",
+      "x": 120,
+      "y": 100,
+      "width": 560,
+      "height": 400,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#2D8CEB",
+      "gradient": {
+        "type": "linear",
+        "angle": 135,
+        "stops": [
+          {"position": 0, "color": "#2D8CEB"},
+          {"position": 0.5, "color": "#A47BFF"},
+          {"position": 1, "color": "#FF6B81"}
+        ]
+      },
+      "stroke": "#8CB4FF",
+      "strokeWidth": 2,
+      "radius": 28,
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "gradient_title",
+      "type": "text",
+      "name": "渐变标题",
+      "x": 170,
+      "y": 240,
+      "width": 460,
+      "height": 80,
+      "rotation": 0,
+      "opacity": 1,
+      "fill": "#00000000",
+      "stroke": "#00000000",
+      "strokeWidth": 0,
+      "text": "Gradient & Guides",
+      "fontFamily": "Microsoft YaHei UI",
+      "fontSize": 40,
+      "bold": true,
+      "align": "center",
+      "textColor": "#FFFFFF",
+      "visible": true,
+      "locked": false
+    }
+  ],
+  "animations": [],
+  "interactions": [],
+  "guides": [
+    {"id": "guide_1", "orientation": "horizontal", "position": 220},
+    {"id": "guide_2", "orientation": "vertical", "position": 300}
+  ]
+}

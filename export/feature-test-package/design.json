@@ -1,0 +1,86 @@
+{
+    "animations": [
+    ],
+    "canvas": {
+        "background": "#0B1018",
+        "height": 600,
+        "width": 800
+    },
+    "elements": [
+        {
+            "fill": "#2D8CEB",
+            "gradient": {
+                "angle": 135,
+                "stops": [
+                    {
+                        "color": "#2D8CEB",
+                        "position": 0
+                    },
+                    {
+                        "color": "#A47BFF",
+                        "position": 0.5
+                    },
+                    {
+                        "color": "#FF6B81",
+                        "position": 1
+                    }
+                ],
+                "type": "linear"
+            },
+            "height": 400,
+            "id": "gradient_card",
+            "locked": false,
+            "name": "渐变卡片",
+            "opacity": 1,
+            "radius": 28,
+            "rotation": 0,
+            "stroke": "#8CB4FF",
+            "strokeWidth": 2,
+            "type": "rect",
+            "visible": true,
+            "width": 560,
+            "x": 120,
+            "y": 100
+        },
+        {
+            "align": "center",
+            "bold": true,
+            "fill": "#00000000",
+            "fontFamily": "Microsoft YaHei UI",
+            "fontSize": 40,
+            "height": 80,
+            "id": "gradient_title",
+            "locked": false,
+            "name": "渐变标题",
+            "opacity": 1,
+            "rotation": 0,
+            "stroke": "#00000000",
+            "strokeWidth": 0,
+            "text": "Gradient & Guides",
+            "textColor": "#FFFFFF",
+            "type": "text",
+            "visible": true,
+            "width": 460,
+            "x": 170,
+            "y": 240
+        }
+    ],
+    "format": "DeepDesign",
+    "generator": "DeepDesign Studio 1.0",
+    "guides": [
+        {
+            "id": "guide_1",
+            "orientation": "horizontal",
+            "position": 220
+        },
+        {
+            "id": "guide_2",
+            "orientation": "vertical",
+            "position": 300
+        }
+    ],
+    "interactions": [
+    ],
+    "title": "渐变与参考线测试",
+    "version": 1
+}
